@@ -1,0 +1,118 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    Gérer les posts
+{%  endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h3>Tutoriels</h3>
+
+        <a href="{{ path('admin.tutorial.new') }}">
+            <button class="btn waves-effect waves-light green lighten-2">
+                <i class="material-icons left">add</i>Créer un tutoriel
+            </button>
+        </a>
+
+        <table class="centered striped highlight">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Créateur</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tuto in tutorials %}
+                    <tr>
+                        <td>#{{ tuto.id }}</td>
+                        <td>{{ tuto.title }}</td>
+                        <td>{{ tuto.idCategory.label }}</td>
+                        <td>{{ tuto.idUser.firstname }} {{ tuto.idUser.lastname }}</td>
+                        <td>{{ tuto.datecreation|date("d/m/Y") }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col s6">
+                                    <a href="{{ path('admin.tutorial.edit', {id: tuto.id}) }}"
+                                       class="btn waves-effect waves-light blue lighten-2">Editer</a>
+                                </div>
+                                <div class="col s6">
+                                    <form method="post" action="{{ path('admin.tutorial.delete', {id: tuto.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tuto.id) }}">
+                                        <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <br>
+    
+    <div class="container">
+        <h3>Forums</h3>
+
+        <a href="{{ path('admin.forum.new') }}">
+            <button class="btn waves-effect waves-light green lighten-2">
+                <i class="material-icons left">add</i>Créer un forum
+            </button>
+        </a>
+
+        <table class="centered striped highlight">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Titre</th>
+                <th>Créateur</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for forum in forums %}
+                <tr>
+                    <td>#{{ forum.id }}</td>
+                    <td>{{ forum.title }}</td>
+                    <td>{{ forum.idUser.firstname }} {{ forum.idUser.lastname }}</td>
+                    <td>{{ forum.datecreation|date("d/m/Y") }}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col s6">
+                                <a href="{{ path('admin.forum.edit', {id: forum.id}) }}"
+                                   class="btn waves-effect waves-light blue lighten-2">Editer</a>
+                            </div>
+                            <div class="col s6">
+                                <form method="post" action="{{ path('admin.forum.delete', {id: forum.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ forum.id) }}">
+                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{%  endblock %}

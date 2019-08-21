@@ -1,0 +1,16 @@
+{% extends 'paterns/base.html.twig' %}
+{% import 'paterns/macros/form.html.twig' as form %}
+
+{% block title %}
+    Modifier
+{%  endblock %}
+
+{% block body %}
+    {% if tutorial is defined or forum is defined %}
+        {{ form.post(form, 'Modifier') }}
+    {% elseif user is defined %}
+        {{ form.user(form, user, 'Modifier') }}
+    {% elseif answer is defined %}
+        {{ form.answer(form, 'Modifier') }}
+    {% endif %}
+{%  endblock %}

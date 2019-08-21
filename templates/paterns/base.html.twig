@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" href="{{ asset('Images/icon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('CSS_JS/materialize-v1.0.0/materialize/css/materialize.min.css') }}" media="screen, projection">
+        <link rel="stylesheet" href="{{ asset('CSS_JS/perso/style.css') }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+    </head>
+
+    <body>
+
+        {% if app.request.pathinfo matches '/^\\/admin(.*?)/' %}
+            {% include('components/navbar_admin.html.twig') %}
+        {% elseif app.request.pathinfo matches '/^\\/about/' or '/^\\/compte/' %}
+            {% include('components/navbar_complete.html.twig') %}
+        {% else %}
+            {% include('components/navbar_simple.html.twig') %}
+        {% endif %}
+
+        {% block body %}{% endblock %}
+
+        <!--Scripts trigger de Materialize-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ asset('CSS_JS/materialize-v1.0.0/materialize/js/materialize.min.js') }}"></script>
+        <script src="{{ asset('CSS_JS/perso/app.js') }}"></script>
+    </body>
+
+    {% include('components/footer.html.twig') %}
+</html>

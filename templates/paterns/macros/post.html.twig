@@ -1,0 +1,31 @@
+{% macro card(type, post) %}
+    {% import 'paterns/macros/chips.html.twig' as chips %}
+
+    <div class="card horizontal">
+        <div class="card-image valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
+            {% if post.idCategory is defined %}
+                <a href="{{ path('category.list', {id: post.idCategory.id, label: post.idCategory.label }) }}" class="brand-logo center">
+                    <img class="tooltipped" data-position="top" data-tooltip="{{ post.idCategory.label }}" style="height: 55px; margin: 10px;" src="{{ asset('Images/icons_categories/' ~ post.idCategory.id ~ '.svg') }}" alt="">
+                </a>
+            {% else %}
+                <div style="width: 20px;"></div>
+            {% endif %}
+        </div>
+        <div class="card-stacked">
+            <span style="margin-left: 15px;" class="card-title"><a href="{{ path(type ~ '.details', {id: post.id, slug: post.slug }) }}">{{ post.title }}</a></span>
+            <div class="card-content">
+                <p>{{ post.content|raw|nl2br|truncate(200, true, '...') }}</p>
+            </div>
+            <div class="card-action">
+                <div class="row" style="margin: 0">
+                    <div class="col s12 m6 l6">
+                        {{ chips.show(post.idUser) }}
+                    </div>
+                    <div class="col m6 l6">
+                        <span class="new badge" data-badge-caption="">{{ post.datecreation|date('d/m/Y') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

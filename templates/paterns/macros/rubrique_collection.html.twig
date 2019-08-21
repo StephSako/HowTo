@@ -1,0 +1,196 @@
+{% macro list(type, titre, data, icon) %}
+    {% import 'paterns/macros/post.html.twig' as post %}
+    <li>
+        <div class="collapsible-header"><i class="material-icons">{{ icon }}</i>{{ titre }}</div>
+        <div class="collapsible-body">
+            {% if data is empty %}
+                <blockquote>Vous n'avez pas créé de {{ type }}.</blockquote
+            {% else %}
+                {% for post in data %}
+                    {{ post.card(type, post) }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </li>
+{% endmacro %}
+
+{% macro form(titre, icon, form, user) %}
+    {% import 'paterns/macros/form.html.twig' as form %}
+
+    <li>
+        <div class="collapsible-header"><i class="material-icons">{{ icon }}</i>{{ titre }}</div>
+        <div class="collapsible-body">
+            {{ form.user(form, user, 'Modifier') }}
+        </div>
+    </li>
+{% endmacro %}
+
+{% macro comments(titre, titre1, titre2, data1, data2, icon, icon1, icon2) %}
+    <li>
+        <div class="collapsible-header"><i class="material-icons">{{ icon }}</i>{{ titre }}</div>
+        <div class="collapsible-body">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">{{ icon1 }}</i>{{ titre1 }}</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            {% if data1 is empty %}
+                                {{ "<blockquote>Vous n'avez pas écrit de commentaires pour les tutoriels.</blockquote" }}
+                            {% else %}
+                                <table class="striped centered">
+                                    <thead>
+                                    <tr>
+                                        <th>Tutorial</th>
+                                        <th>Auteur</th>
+                                        <th>Catégorie</th>
+                                        <th>Création</th>
+                                        <th>Mes commentaires</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in data1 %}
+                                        <tr>
+                                            <td><a href="{{ path('tutorial.details', {id: data.idTutorial.id, slug: data.idTutorial.slug }) }}">{{ data.idTutorial.title }}</a></td>
+                                            <td>{{ data.idTutorial.idUser.firstname ~ ' ' ~ data.idTutorial.idUser.lastname }}</td>
+                                            <td>{{ data.idTutorial.idCategory.label }}</td>
+                                            <td>{{ data.idTutorial.datecreation|date('d/m/Y') }}</td>
+                                            <td>{{ data.content }}</td>
+                                            <td><form method="post" action="{{ path('tutorial.comment.delete', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
+                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">{{ icon2 }}</i>{{ titre2 }}</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            {% if data2 is empty %}
+                                {{ "<blockquote>Vous n'avez pas écrit de commentaires pour les forums.</blockquote" }}
+                            {% else %}
+                                <table class="striped centered">
+                                    <thead>
+                                    <tr>
+                                        <th>Forum</th>
+                                        <th>Auteur</th>
+                                        <th>Création</th>
+                                        <th>Mes commentaires</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in data2 %}
+                                        <tr>
+                                            <td><a href="{{ path('forum.details', {id: data.idForum.id, slug: data.idForum.slug }) }}">{{ data.idForum.title }}</a></td>
+                                            <td>{{ data.idForum.idUser.firstname ~ ' ' ~ data.idForum.idUser.lastname }}</td>
+                                            <td>{{ data.idForum.datecreation|date('d/m/Y') }}</td>
+                                            <td>{{ data.content }}</td>
+                                            <td><form method="post" action="{{ path('forum.comment.delete', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
+                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+{% endmacro %}
+
+{% macro suggestion(titre, titre1, titre2, data1, data2, icon, icon1, icon2) %}
+    <li>
+        <div class="collapsible-header"><i class="material-icons">{{ icon }}</i>{{ titre }}</div>
+        <div class="collapsible-body">
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">{{ icon1 }}</i>{{ titre1 }}</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            {% if data1 is empty %}
+                                {{ "<blockquote>Vous n'avez pas reçu de suggestions à vos tutoriels.</blockquote" }}
+                            {% else %}
+                                <table class="striped centered">
+                                    <thead>
+                                    <tr>
+                                        <th>Tutorial</th>
+                                        <th>Suggestionneur</th>
+                                        <th>Son message</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in data1 %}
+                                        <tr>
+                                            <td><a href="{{ path('tutorial.details', {id: data.idTutorial.id, slug: data.idTutorial.slug }) }}">{{ data.idTutorial.title }}</a></td>
+                                            <td>{{ data.idUser.firstname ~ ' ' ~ data.idUser.lastname }}</td>
+                                            <td>{{ data.content }}</td>
+                                            <td><form method="post" action="{{ path('tutorial.suggestion.deleteSuggTuto', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
+                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">{{ icon2 }}</i>{{ titre2 }}</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            {% if data2 is empty %}
+                                {{ "<blockquote>Vous n'avez pas reçu de suggestions à vos forums.</blockquote" }}
+                            {% else %}
+                                <table class="striped centered">
+                                    <thead>
+                                    <tr>
+                                        <th>Tutorial</th>
+                                        <th>Suggestionneur</th>
+                                        <th>Son message</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for data in data2 %}
+                                        <tr>
+                                            <td><a href="{{ path('forum.details', {id: data.idForum.id, slug: data.idForum.slug }) }}">{{ data.idForum.title }}</a></td>
+                                            <td>{{ data.idUser.firstname ~ ' ' ~ data.idUser.lastname }}</td>
+                                            <td>{{ data.content }}</td>
+                                            <td><form method="post" action="{{ path('forum.suggestion.deleteSuggFor', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
+                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+{% endmacro %}

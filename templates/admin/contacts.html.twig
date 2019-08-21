@@ -1,0 +1,50 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    Contacts
+{%  endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h3>Demandes d'information</h3>
+
+        <table class="striped centered">
+            <thead>
+            <tr>
+                <th>Message</th>
+                <th>Demandeur</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for info in infos_list %}
+                <tr>
+                    <td>{{ info.content }}</td>
+                    <td>{{ info.idUser.firstname ~ ' ' ~ info.idUser.lastname }}</td>
+                    <td>{{ info.dateDemande|date('d/m/Y') }}</td>
+                    <td><form method="post" action="{{ path('admin.info.delete', {id: info.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ info.id) }}">
+                            <button class="btn waves-effect waves-light red lighten-2">X</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{%  endblock %}

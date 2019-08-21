@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="icon" href="{{ asset('Images/icon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('CSS_JS/materialize-v1.0.0/materialize/css/materialize.min.css') }}" media="screen, projection">
+        <link rel="stylesheet" href="{{ asset('CSS_JS/perso/style.css') }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+    </head>
+
+    <body>
+        {% include('components/navbar_complete.html.twig') %}
+
+        <div class="row">
+            <div class="col l2 list_lat">
+                {% include('components/categories_list.html.twig') %}
+            </div>
+            <div class="col l8">
+                {% block body %}{% endblock %}
+            </div>
+            <div class="col l2 list_lat">
+                {% include('components/latest_posts.html.twig') %}
+            </div>
+        </div>
+
+        <!--Scripts trigger de Materialize-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ asset('CSS_JS/materialize-v1.0.0/materialize/js/materialize.min.js') }}"></script>
+        <script src="{{ asset('CSS_JS/perso/app.js') }}"></script>
+    </body>
+
+    {% include('components/footer.html.twig') %}
+</html>

@@ -1,0 +1,26 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    Connexion
+{%  endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h3>Vous n'êtes pas connecté.</h3>
+
+        <a href="{{ path('connexion') }}">
+            <button class="btn waves-effect waves-teal btn-flat light-blue darken-1">Se connecter</button>
+        </a>
+
+        <a href="{{ path('inscription') }}">
+            <button class="btn waves-effect waves-teal btn-flat purple lighten-5">S'inscrire</button>
+        </a>
+        <br>
+        <a href="{{ path('tutorials.showTutorials') }}">
+            <button class="btn waves-effect waves-light center">Retour à l'accueil</button>
+        </a>
+    </div>
+
+    {% include('components/floating_button.html.twig') %}
+{%  endblock %}

@@ -1,0 +1,51 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    A propos
+{%  endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="container coloredcard about blue lighten-3">
+        <h4 style="color:#0095ba;"><strong> Qui sommes-nous ? </strong></h4><br/>
+
+        <p>Bonjour à toutes et à tous !<br><br>
+            Nous sommes la team Commentfaire.fr et nous vous souhaitons la bienvenue sur notre site DIY !<br><br>
+            Site o&ugrave; nous mettons l'accent sur tous les aspects du DIY : autant le lifestyle, que l'informatique et bien
+            d'autres catégories ;)<br><br>
+            Nous nous engageons à réaliser des tutoriels simples et efficaces pour vous offrir une expérience de
+            lecture agréable et instructive.<br><br>
+            Bonne lecture :)
+        </p><br>
+
+        <h4 style="color:#00ba00;"><strong>Règles et Comportement</strong></h4>
+
+        <p>Commentfaire.fr est un lieu d'entraide et de partage.<br><br>
+            Afin de vous assurer une navigation sans encombre sur notre site, nous vous demandons de bien vouloir respecter
+            les règles de base en restant poli et respectueux notamment dans les sections commentaires et sur le forum.
+            <br><br>Merci à tous !</p><br/>
+
+        <div class="coloredcard blue lighten-4">
+            <h4 style="color:#ba004a;"><strong> Nous contacter ?</strong></h4>
+
+            {% if app.user is empty %}
+                <blockquote>Vous devez vous connecter pour nous contacter.</blockquote>
+            {% else %}
+                {{ form_start(form) }}
+                    {{ form_row(form.content) }}
+                    <button class="btn waves-effect waves-light light-blue darken-1" type="submit">Envoyer
+                        <i class="material-icons left">contact_mail</i>
+                    </button>
+                {{ form_end(form) }}
+            {% endif %}
+        </div>
+    </div>
+
+    {% include('components/floating_button.html.twig') %}
+{%  endblock %}

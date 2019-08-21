@@ -1,0 +1,18 @@
+{% extends 'paterns/base_triptych.html.twig' %}
+{% import 'paterns/macros/post.html.twig' as _post %}
+
+{% block title %}
+    {{ label }}
+{%  endblock %}
+
+{% block body %}
+
+    <h4><b>{{ label }}</b></h4>
+    <div class="row">
+        {% for post in list_posts %}
+            {{ _post.card(current_menu, post) }}
+        {% endfor %}
+    </div>
+
+    {% include('components/floating_button.html.twig') %}
+{%  endblock %}

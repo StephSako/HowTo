@@ -1,0 +1,23 @@
+<table class="highlight striped centered blue lighten-4 list_lat">
+    <tr>
+        <th>Derniers tutoriels</th>
+    </tr>
+    {% for tutorial in latest_posts_tutorials %}
+        <tr>
+            <td><a href="{{ path('tutorial.details', {id: tutorial.id, slug: tutorial.slug }) }}">{{ tutorial.title }}</a></td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<table class="highlight striped centered blue lighten-4 list_lat">
+    <tr>
+        <th>Derniers forums</th>
+    </tr>
+    {% for forum in latest_posts_forums %}
+        <tr>
+            <td>
+                <a href="{{ path('forum.details', {id: forum.id, slug: forum.slug }) }}">{{ forum.title }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>

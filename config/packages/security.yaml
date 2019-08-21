@@ -1,0 +1,28 @@
+security:
+    providers:
+        from_database:
+            entity:
+                class: App\Entity\User
+                property: mail
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            form_login:
+                login_path: connexion
+                check_path: connexion
+            logout:
+                path: /logout
+                target: /
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/compte, roles: ROLE_USER }
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12

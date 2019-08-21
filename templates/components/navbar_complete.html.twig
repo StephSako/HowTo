@@ -1,0 +1,118 @@
+{% import 'paterns/macros/chips.html.twig' as chips %}
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+    {% if app.user is null %}
+        <li><a href="{{ path('connexion') }}">Se connecter</a></li>
+        <li><a href="{{ path('inscription') }}">S'inscrire</a></li>
+    {% else %}
+        <li><a href="{{ path('myaccount.home') }}">Mon compte</a></li>
+        {% if 'ROLE_ADMIN' in app.token.roleNames %}
+            <li><a href="{{ path('admin.home.index') }}">Administration</a></li>
+        {% endif %}
+        <li class="divider"></li>
+        <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+    {% endif %}
+</ul>
+
+<!-- Sidenav Structure -->
+<ul class="sidenav" id="sidenav">
+    <li {% if current_menu is defined and current_menu == 'tutorial' %}class="active"{% endif %}>
+        <a href="{{ path('tutorials.showTutorials') }}">Tutoriels</a>
+    </li>
+    <li {% if current_menu is defined and current_menu == 'forum' %}class="active"{% endif %}>
+        <a href="{{ path('forums.showForums') }}">Forums</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <nav class="white search_nav">
+            <div class="nav-wrapper">
+                <form method="GET" action="{{ path('tutorials.showTutorials') }}">
+                    <div class="input-field">
+                        <input type="search" placeholder="Rechercher" name="search">
+                        <label class="label-icon"><i class="material-icons">search</i></label>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </li>
+    <li class="divider"></li>
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header">{% if not app.user is null %}
+                                                    {{ chips.show(app.user) }}
+                                                {% else %}
+                                                    {{ 'Compte' }}
+                                                {% endif %}
+                    <i class="material-icons">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        {% if app.user is null %}
+                            <li><a href="{{ path('connexion') }}">Se connecter</a></li>
+                            <li><a href="{{ path('inscription') }}">S'inscrire</a></li>
+                        {% else %}
+                            <li><a href="{{ path('myaccount.home') }}">Mon compte</a></li>
+                            {% if 'ROLE_ADMIN' in app.token.roleNames %}
+                                <li><a href="{{ path('admin.home.index') }}">Administration</a></li>
+                            {% endif %}
+                            <li class="divider"></li>
+                            <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+
+
+
+
+
+<nav class="blue lighten-1">
+    <div class="nav-wrapper">
+        <!-- Sidenav Trigger -->
+        <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="{{ path('tutorials.showTutorials') }}" class="brand-logo center">
+            <img src="{{ asset('Images/icon2.png') }}" alt="logo"/>
+        </a>
+
+        <ul class="left hide-on-med-and-down">
+            <li {% if current_menu is defined and current_menu == 'tutorial' %}class="active"{% endif %}>
+                <a href="{{ path('tutorials.showTutorials') }}">Tutoriels</a>
+            </li>
+            <li {% if current_menu is defined and current_menu == 'forum' %}class="active"{% endif %}>
+                <a href="{{ path('forums.showForums') }}">Forums</a>
+            </li>
+            <li>
+                <nav class="blue lighten-2 search_nav">
+                    <div class="nav-wrapper">
+                        <form method="GET" action="{{ path('tutorials.showTutorials') }}">
+                            <div class="input-field">
+                                <input type="search" placeholder="Rechercher" name="search">
+                                <label class="label-icon"><i class="material-icons">search</i></label>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
+            <!-- Dropdown Trigger -->
+            <li>
+                <a class="dropdown-trigger" href="#" data-target="dropdown1">
+                    {% if not app.user is null %}
+                        {{ chips.show(app.user) }}
+                    {% else %}
+                        {{ 'Compte' }}
+                    {% endif %}
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

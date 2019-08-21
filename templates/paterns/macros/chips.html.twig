@@ -1,0 +1,6 @@
+{% macro show(user) %}
+    <div class="chip blue lighten-1 white-text">
+        <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="">
+        {{ user.firstname|capitalize}} {{ user.lastname|upper }}
+    </div>
+{% endmacro %}

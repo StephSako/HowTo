@@ -1,0 +1,37 @@
+{% macro show(details_post, nb_likes, has_liked, type) %}
+    {% if has_liked == true %}
+        <div class="right">
+            <form method="POST" action="{{ path(type ~ '.unlike', {id: details_post.id}) }}">
+                <button class="btn tooltipped waves-effect waves-light red darken-2 btnSpan" type="submit" name="action"
+                    data-position="top" data-tooltip="{{ nb_likes }}">Unlike
+                    <i class="material-icons right">thumb_down</i>
+                </button>
+            </form>
+        </div>
+    {% elseif has_liked == false %}
+        <div class="right">
+            <form method="POST" action="{{ path(type ~ '.like', {id: details_post.id}) }}">
+                <button class="btn tooltipped waves-effect waves-light green accent-4 btnSpan" type="submit" name="action"
+                    data-position="top" data-tooltip="{{ nb_likes }}">Like
+                    <i class="material-icons right">thumb_up</i>
+                </button>
+            </form>
+        </div>
+    {% endif %}
+
+    <div class="right">
+        <a href="#">
+            <button class="btn waves-effect waves-light right yellow darken-3 button_post">
+                <i class="material-icons left">lightbulb_outline</i>Suggestion
+            </button>
+        </a>
+    </div>
+
+    <div class="right">
+        <a href="{{ path(type ~ '.report', {id: details_post.id}) }}">
+            <button class="btn waves-effect waves-light red lighten-2 button_post">
+                <i class="material-icons left">report</i>Signaler
+            </button>
+        </a>
+    </div>
+{% endmacro %}

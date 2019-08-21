@@ -1,0 +1,72 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    Gérer les utilisateurs
+{%  endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h3>Utilisateurs</h3>
+
+        <a href="{{ path('admin.user.new') }}">
+            <button class="btn waves-effect waves-light green lighten-2">
+                <i class="material-icons left">add</i>Créer un utilisateur
+            </button>
+        </a>
+
+        <table class="centered striped highlight">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Rôle</th>
+                    <th>Nom</th>
+                    <th>Mail</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>#{{ user.id }}</td>
+                        <td style="width: 12%;"><img style="width: 100px;" src="{{ vich_uploader_asset(user, 'imageFile') }}"
+                                 alt="{{ user.filename }}">
+                            <figcaption>{{ user.filename }}</figcaption></td>
+                        <td>{% if user.isAdmin %}<span style="color: red;">{{ 'Administrateur' }}</span>{% else %}<span style="color: blue;">{{ 'Utilisateur' }}{% endif %}</td>
+                        <td>{{ user.lastname ~ ' ' ~ user.firstname }}</td>
+                        <td>{{ user.mail }}</td>
+                        <td>
+
+                            <div class="row">
+                                <div class="col s6">
+                                    <a style="text-align: center;" href="{{ path('admin.user.edit', {id: user.id}) }}"
+                                       class="btn waves-effect waves-light blue lighten-2">Editer</a>
+                                </div>
+                                <div class="col s6">
+                                    <form method="post" action="{{ path('admin.user.delete', {id: user.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                        <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{%  endblock %}

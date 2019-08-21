@@ -1,0 +1,7 @@
+{% macro show(comment) %}
+    {% import 'paterns/macros/chips.html.twig' as chips %}
+    <div class="coloredcard_comment">
+            {{ chips.show(comment.idUser) }}<br>{{ comment.content|nl2br }}
+        <span class="new badge" data-badge-caption="">Posté le {{ comment.dateResponse|date("d/m/Y") }}</span>
+    </div>
+{% endmacro %}

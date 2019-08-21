@@ -1,0 +1,101 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    Signalements
+{%  endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h3>Signalements de tutoriels</h3>
+
+        <table class="striped centered">
+            <thead>
+            <tr>
+                <th>Motif du signalement</th>
+                <th>Demandeur</th>
+                <th>Tutoriel</th>
+                <th>Auteur</th>
+                <th>Date de création</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for report in tutorialreports %}
+                <tr>
+                    <td>{{ report.idReportingLabel.label }}</td>
+                    <td>{{ report.idTutorial.idUser.firstname ~ ' ' ~ report.idTutorial.idUser.lastname }}</td>
+                    <td><a href="{{ path('tutorial.details', {id: report.idTutorial.id, slug: report.idTutorial.slug }) }}">{{ report.idTutorial.title }}</a></td>
+                    <td>{{ report.idUser.firstname ~ ' ' ~ report.idUser.lastname  }}</td>
+                    <td>{{ report.idTutorial.datecreation|date('d/m/Y') }}</td>
+                    <td><form method="post" action="{{ path('tutorial.report.deleteTR', {id: report.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ report.id) }}">
+                            <button class="btn waves-effect waves-light red lighten-2">X</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <h3>Signalements de forums</h3>
+
+        <table class="striped centered">
+            <thead>
+                <tr>
+                    <th>Motif du signalement</th>
+                    <th>Demandeur</th>
+                    <th>Forum</th>
+                    <th>Auteur</th>
+                    <th>Date de création</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for report in forumreports %}
+                <tr>
+                    <td>{{ report.idReportingLabel.label }}</td>
+                    <td>{{ report.idForum.idUser.firstname ~ ' ' ~ report.idForum.idUser.lastname }}</td>
+                    <td><a href="{{ path('forum.details', {id: report.idForum.id, slug: report.idForum.slug }) }}">{{ report.idForum.title }}</a></td>
+                    <td>{{ report.idUser.firstname ~ ' ' ~ report.idUser.lastname  }}</td>
+                    <td>{{ report.idForum.datecreation|date('d/m/Y') }}</td>
+                    <td><form method="post" action="{{ path('forum.report.deleteFR', {id: report.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ report.id) }}">
+                            <button class="btn waves-effect waves-light red lighten-2">X</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{%  endblock %}

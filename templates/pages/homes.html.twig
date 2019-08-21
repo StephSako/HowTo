@@ -1,0 +1,25 @@
+{% extends 'paterns/base_triptych.html.twig' %}
+{% import 'paterns/macros/post.html.twig' as _post %}
+
+{% block title %}
+    {{ current_menu|capitalize ~ 's' }}
+{%  endblock %}
+
+{% block body %}
+
+    <legend>{{ current_menu|capitalize ~ 's' }} les plus récents</legend>
+    <div class="row">
+        {% for post in latest_posts_body %}
+            {{ _post.card(current_menu, post) }}
+        {% endfor %}
+    </div>
+
+    <legend>Tous les {{ current_menu ~ 's' }}</legend>
+    <div class="row">
+        {% for post in all %}
+            {{ _post.card(current_menu, post) }}
+        {% endfor %}
+    </div>
+
+    {% include('components/floating_button.html.twig') %}
+{%  endblock %}
