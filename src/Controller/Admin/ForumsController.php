@@ -35,7 +35,7 @@ class ForumsController extends AbstractController {
      */
     public function new(Request $request):Response
     {
-        $forum = new Forum();
+        $forum = new Forum($this->getUser());
         $form = $this->createForm(ForumType::class, $forum);
         $form->handleRequest($request);
 

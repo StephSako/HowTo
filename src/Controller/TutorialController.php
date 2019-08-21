@@ -15,6 +15,7 @@ use App\Repository\TutorialRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,7 @@ class TutorialController extends AbstractController
      * @param Request $request
      * @return Response
      * @throws NonUniqueResultException
+     * @throws Exception
      */
     public function details(Tutorial $tutorial, Request $request) :Response
     {
@@ -116,7 +118,7 @@ class TutorialController extends AbstractController
      */
     public function new(Request $request):Response
     {
-        $tutorial = new Tutorial();
+        $tutorial = new Tutorial($this->getUser());
         $form = $this->createForm(TutorialType::class, $tutorial);
         $form->handleRequest($request);
 

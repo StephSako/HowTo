@@ -131,14 +131,14 @@ class ForumsController extends AbstractController {
      */
     public function new(Request $request):Response
     {
-        $forum = new Forum();
+        $forum = new Forum($this->getUser());
         $form = $this->createForm(ForumType::class, $forum);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $this->em->persist($forum);
             $this->em->flush();
-            return $this->redirectToRoute('tutorials.showTutorials');
+            return $this->redirectToRoute('forums.showForums');
         }
 
         return $this->render('pages/new.html.twig', [

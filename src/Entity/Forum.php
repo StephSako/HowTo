@@ -17,9 +17,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Forum
 {
 
-    public function __construct()
+    public function __construct(?User $idUser)
     {
         $this->setDatecreation(new DateTime());
+        $this->setIdUser($idUser);
     }
 
     /**

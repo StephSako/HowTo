@@ -41,7 +41,7 @@ class TutorialController extends AbstractController {
      */
     public function new(Request $request):Response
     {
-        $tutorial = new Tutorial();
+        $tutorial = new Tutorial($this->getUser());
         $form = $this->createForm(TutorialType::class, $tutorial);
         $form->handleRequest($request);
 
