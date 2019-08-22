@@ -53,12 +53,12 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/report/tutorial/{id}", name="tutorial.report")
+     * @Route("/tutorial/report/{id}", name="reporttutorial")
      * @param Request $request
      * @param Tutorial $tutorial
      * @return Response
      */
-    public function report(Request $request, Tutorial $tutorial):Response
+    public function reporttutorial(Request $request, Tutorial $tutorial):Response
     {
         $report = new TutorialReporting($this->getUser(), $tutorial);
         $form = $this->createForm(TutorialReportType::class, $report);
@@ -78,13 +78,12 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/report/forum/{id}", name="forum.report")
+     * @Route("/forum/report/{id}", name="reportforum")
      * @param Request $request
-     * @param string $type
      * @param Forum $forum
      * @return Response
      */
-    public function reportForum(Request $request, Forum $forum):Response
+    public function reportforum(Request $request, Forum $forum):Response
     {   $report = new ForumReporting($this->getUser(), $forum);
         $form = $this->createForm(ForumReportType::class, $report);
         $form->handleRequest($request);

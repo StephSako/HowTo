@@ -24,6 +24,7 @@
         <table class="striped centered">
             <thead>
             <tr>
+                <th></th>
                 <th>Motif du signalement</th>
                 <th>Demandeur</th>
                 <th>Tutoriel</th>
@@ -35,6 +36,7 @@
             <tbody>
             {% for report in tutorialreports %}
                 <tr>
+                    <td>#{{ report.id }}</td>
                     <td>{{ report.idReportingLabel.label }}</td>
                     <td>{{ report.idTutorial.idUser.firstname ~ ' ' ~ report.idTutorial.idUser.lastname }}</td>
                     <td><a href="{{ path('tutorial.details', {id: report.idTutorial.id, slug: report.idTutorial.slug }) }}">{{ report.idTutorial.title }}</a></td>
@@ -71,6 +73,7 @@
         <table class="striped centered">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Motif du signalement</th>
                     <th>Demandeur</th>
                     <th>Forum</th>
@@ -82,6 +85,7 @@
             <tbody>
             {% for report in forumreports %}
                 <tr>
+                    <td>#{{ report.id }}</td>
                     <td>{{ report.idReportingLabel.label }}</td>
                     <td>{{ report.idForum.idUser.firstname ~ ' ' ~ report.idForum.idUser.lastname }}</td>
                     <td><a href="{{ path('forum.details', {id: report.idForum.id, slug: report.idForum.slug }) }}">{{ report.idForum.title }}</a></td>

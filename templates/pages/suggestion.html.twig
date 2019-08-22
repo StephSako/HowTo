@@ -1,0 +1,17 @@
+{% extends 'paterns/base.html.twig' %}
+
+{% block title %}
+    Suggestion
+{%  endblock %}
+
+{% block body %}
+
+    <div id="container" style="margin-right: 20%; margin-left: 20%;  margin-top: 3%;">
+        <h5>Faire une suggestion d'amélioration pour<br><b>{{ post.title }}</b> de <b>{{ post.idUser.firstname ~ ' ' ~ post.idUser.lastname }}</b></h5>
+
+        {{ form_start(form) }}
+            {{ form_row(form.content) }}
+            <button class="btn waves-effect waves-light blue lighten-2">Suggérer</button>
+        {{ form_end(form) }}
+    </div>
+{%  endblock %}

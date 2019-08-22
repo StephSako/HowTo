@@ -13,6 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SuggestionForum
 {
+
+    public function __construct(?User $user, Forum $forum)
+    {
+        $this
+            ->setIdUser($user)
+            ->setIdForum($forum);
+    }
+
     /**
      * @var int
      *

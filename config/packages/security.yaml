@@ -21,6 +21,17 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/compte, roles: ROLE_USER }
+        - { path: ^/forum/create, roles: ROLE_USER }
+        - { path: ^/tutorial/create, roles: ROLE_USER }
+        - { path: ^/tutorial/like, roles: ROLE_USER }
+        - { path: ^/tutorial/unlike, roles: ROLE_USER }
+        - { path: ^/forum/unlike, roles: ROLE_USER }
+        - { path: ^/forum/like, roles: ROLE_USER }
+        - { path: ^/report, roles: ROLE_USER }
+        - { path: ^/forum/suggestion, roles: ROLE_USER }
+        - { path: ^/tutorial/suggestion, roles: ROLE_USER }
+        - { path: ^/forum/report, roles: ROLE_USER }
+        - { path: ^/tutorial/report, roles: ROLE_USER }
 
     encoders:
         App\Entity\User:

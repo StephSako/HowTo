@@ -13,6 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SuggestionTutorial
 {
+
+    public function __construct(?User $user, Tutorial $tutorial)
+    {
+        $this
+            ->setIdUser($user)
+            ->setIdTutorial($tutorial);
+    }
+
     /**
      * @var int
      *

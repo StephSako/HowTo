@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Forum;
 use App\Entity\SuggestionForum;
 use App\Entity\SuggestionTutorial;
+use App\Entity\Tutorial;
+use App\Form\SuggestionForumType;
+use App\Form\SuggestionTutorialType;
 use App\Repository\SuggestionForumRepository;
 use App\Repository\SuggestionTutorialRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SuggestionsController extends AbstractController
@@ -32,12 +37,64 @@ class SuggestionsController extends AbstractController
     }
 
     /**
-     * @Route("/tutorial/suggestion/delete/{id}", name="tutorial.suggestion.deleteSuggTuto", methods={"DELETE"})
+     * @Route("/forum/suggestion/{id}", name="newSuggestionforum")
+     * @param Forum $forum
+     * @param Request $request
+     * @return Response
+     */
+    public function newSuggestionforum(Forum $forum, Request $request): Response
+    {
+        $suggestionForum = new SuggestionForum($this->getUser(), $forum);
+        $form = $this->createForm(SuggestionForumType::class, $suggestionForum);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($suggestionForum);
+            $this->em->flush();
+            $this->addFlash('success', 'Votre suggestion a été envoyée. Merci !');
+            return $this->redirectToRoute('forum.details');
+        }
+
+        return $this->render('pages/suggestion.html.twig', [
+            'type' => 'forum',
+            'post' => $forum,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/tutorial/suggestion/{id}", name="newSuggestiontutorial")
+     * @param Tutorial $tutorial
+     * @param Request $request
+     * @return Response
+     */
+    public function newSuggestiontutorial(Tutorial $tutorial, Request $request): Response
+    {
+        $suggestionTutorial = new SuggestionTutorial($this->getUser(), $tutorial);
+        $form = $this->createForm(SuggestionTutorialType::class, $suggestionTutorial);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($suggestionTutorial);
+            $this->em->flush();
+            $this->addFlash('success', 'Votre suggestion a été envoyée. Merci !');
+            return $this->redirectToRoute('tutorial.details');
+        }
+
+        return $this->render('pages/suggestion.html.twig', [
+            'type' => 'tutorial',
+            'post' => $tutorial,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/tutorial/suggestion/delete/{id}", name="deleteSuggestiontutorial", methods={"DELETE"})
      * @param SuggestionTutorial $suggestionTutorial
      * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteSuggTuto(SuggestionTutorial $suggestionTutorial, Request $request)
+    public function deleteSuggestiontutorial(SuggestionTutorial $suggestionTutorial, Request $request)
     {
         if ($this->isCsrfTokenValid('delete' . $suggestionTutorial->getId(), $request->get('_token'))) {
             $this->em->remove($suggestionTutorial);
@@ -49,14 +106,13 @@ class SuggestionsController extends AbstractController
             return $this->redirectToRoute('myaccount.home');
         }
     }
-
     /**
-     * @Route("/forum/suggestion/delete/{id}", name="forum.suggestion.deleteSuggFor", methods={"DELETE"})
+     * @Route("/forum/suggestion/delete/{id}", name="deleteSuggestionforum", methods={"DELETE"})
      * @param SuggestionForum $suggestionForum
      * @param Request $request
      * @return RedirectResponse
      */
-    public function deleteSuggFor(SuggestionForum $suggestionForum, Request $request)
+    public function deleteSuggestionforum(SuggestionForum $suggestionForum, Request $request)
     {
         if ($this->isCsrfTokenValid('delete' . $suggestionForum->getId(), $request->get('_token'))) {
             $this->em->remove($suggestionForum);

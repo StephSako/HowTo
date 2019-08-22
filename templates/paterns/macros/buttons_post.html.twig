@@ -20,7 +20,7 @@
     {% endif %}
 
     <div class="right">
-        <a href="#">
+        <a href="{{ path('newSuggestion' ~ type, {id: details_post.id}) }}">
             <button class="btn waves-effect waves-light right yellow darken-3 button_post">
                 <i class="material-icons left">lightbulb_outline</i>Suggestion
             </button>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="right">
-        <a href="{{ path(type ~ '.report', {id: details_post.id}) }}">
+        <a href="{{ path('report' ~ type, {id: details_post.id}) }}">
             <button class="btn waves-effect waves-light red lighten-2 button_post">
                 <i class="material-icons left">report</i>Signaler
             </button>

@@ -22,7 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ForumsController extends AbstractController {
+class ForumsController extends AbstractController
+{
 
     /**
      * @var CategoryRepository
@@ -83,7 +84,7 @@ class ForumsController extends AbstractController {
      * @return Response
      * @throws NonUniqueResultException
      */
-    public function details(Request $request, Forum $forum):Response
+    public function details(Request $request, Forum $forum): Response
     {
         $details_post = $this->fr->find($forum);
         $nbLikes = $this->lfr->getNbLikes($forum);
@@ -129,13 +130,13 @@ class ForumsController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request):Response
+    public function new(Request $request): Response
     {
         $forum = new Forum($this->getUser());
         $form = $this->createForm(ForumType::class, $forum);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($forum);
             $this->em->flush();
             return $this->redirectToRoute('forums.showForums');
@@ -152,7 +153,8 @@ class ForumsController extends AbstractController {
      * @param Forum $forum
      * @return Response
      */
-    public function like(Forum $forum){
+    public function like(Forum $forum)
+    {
         $likeforum = new LikeForum($this->getUser(), $forum);
         $this->em->persist($likeforum);
         $this->em->flush();
@@ -170,7 +172,8 @@ class ForumsController extends AbstractController {
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function unlike(Forum $forum){
+    public function unlike(Forum $forum)
+    {
         $likeforum = $this->lfr->findForumLiked($this->getUser(), $forum);
         $this->em->remove($likeforum);
         $this->em->flush();

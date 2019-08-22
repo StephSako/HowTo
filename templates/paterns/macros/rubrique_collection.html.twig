@@ -140,7 +140,7 @@
                                             <td><a href="{{ path('tutorial.details', {id: data.idTutorial.id, slug: data.idTutorial.slug }) }}">{{ data.idTutorial.title }}</a></td>
                                             <td>{{ data.idUser.firstname ~ ' ' ~ data.idUser.lastname }}</td>
                                             <td>{{ data.content }}</td>
-                                            <td><form method="post" action="{{ path('tutorial.suggestion.deleteSuggTuto', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                            <td><form method="post" action="{{ path('deleteSuggestiontutorial', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
                                                     <button class="btn waves-effect waves-light red lighten-2">X</button>
@@ -176,7 +176,7 @@
                                             <td><a href="{{ path('forum.details', {id: data.idForum.id, slug: data.idForum.slug }) }}">{{ data.idForum.title }}</a></td>
                                             <td>{{ data.idUser.firstname ~ ' ' ~ data.idUser.lastname }}</td>
                                             <td>{{ data.content }}</td>
-                                            <td><form method="post" action="{{ path('forum.suggestion.deleteSuggFor', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
+                                            <td><form method="post" action="{{ path('deleteSuggestionforum', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
                                                     <button class="btn waves-effect waves-light red lighten-2">X</button>
