@@ -25,9 +25,9 @@
             <button class="btn waves-effect waves-light green lighten-2">
                 <i class="material-icons left">add</i>Créer un tutoriel
             </button>
-        </a>
+        </a><br>
 
-        <table class="centered striped highlight">
+        <table class="centered striped highlight responsive-table">
             <thead>
                 <tr>
                     <th></th>
@@ -50,13 +50,13 @@
                             <div class="row">
                                 <div class="col s6">
                                     <a href="{{ path('admin.tutorial.edit', {id: tuto.id}) }}"
-                                       class="btn waves-effect waves-light blue lighten-2">Editer</a>
+                                       class="btn waves-effect waves-light blue lighten-2"><i class="material-icons">edit</i></a>
                                 </div>
                                 <div class="col s6">
                                     <form method="post" action="{{ path('admin.tutorial.delete', {id: tuto.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tuto.id) }}">
-                                        <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                        <button class="btn waves-effect waves-light red lighten-2"><i class="material-icons">delete_forever</i></button>
                                     </form>
                                 </div>
                             </div>
@@ -76,9 +76,9 @@
             <button class="btn waves-effect waves-light green lighten-2">
                 <i class="material-icons left">add</i>Créer un forum
             </button>
-        </a>
+        </a><br>
 
-        <table class="centered striped highlight">
+        <table class="centered striped highlight responsive-table">
             <thead>
             <tr>
                 <th></th>
@@ -99,13 +99,13 @@
                         <div class="row">
                             <div class="col s6">
                                 <a href="{{ path('admin.forum.edit', {id: forum.id}) }}"
-                                   class="btn waves-effect waves-light blue lighten-2">Editer</a>
+                                   class="btn waves-effect waves-light blue lighten-2"><i class="material-icons">edit</i></a>
                             </div>
                             <div class="col s6">
                                 <form method="post" action="{{ path('admin.forum.delete', {id: forum.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ forum.id) }}">
-                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                    <button class="btn waves-effect waves-light red lighten-2"><i class="material-icons">delete_forever</i></button>
                                 </form>
                             </div>
                         </div>

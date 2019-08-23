@@ -2,13 +2,11 @@
     {% import 'paterns/macros/chips.html.twig' as chips %}
 
     <div class="card horizontal">
-        <div class="card-image valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
+        <div class="card-image-{{ type }} valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
             {% if post.idCategory is defined %}
                 <a href="{{ path('category.list', {id: post.idCategory.id, label: post.idCategory.label }) }}" class="brand-logo center">
                     <img class="tooltipped" data-position="top" data-tooltip="{{ post.idCategory.label }}" src="{{ asset('Images/icons_categories/' ~ post.idCategory.id ~ '.svg') }}" alt="">
                 </a>
-            {% else %}
-                <div style="width: 20px;"></div>
             {% endif %}
         </div>
         <div class="card-stacked">
@@ -39,13 +37,11 @@
         {{ buttons.show(post, nb_likes, has_liked, type) }}
     </div>
     <div class="card horizontal">
-        <div class="card-image valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
+        <div class="card-image-{{ type }} valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
             {% if post.idCategory is defined %}
                 <a href="{{ path('category.list', {id: post.idCategory.id, label: post.idCategory.label }) }}" class="brand-logo center">
                     <img class="tooltipped" data-position="top" data-tooltip="{{ post.idCategory.label }}" src="{{ asset('Images/icons_categories/' ~ post.idCategory.id ~ '.svg') }}" alt="">
                 </a>
-            {% else %}
-                <div style="width: 20px;"></div>
             {% endif %}
         </div>
         <div class="card-stacked">

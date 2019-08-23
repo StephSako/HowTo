@@ -85,6 +85,10 @@ table.list_lat {
     display: none;
 }
 
+table{
+    margin-bottom: 5%;
+}
+
 .nav-wrapper a.brand-logo {
     height: 64px;
     width: 64px;
@@ -97,9 +101,13 @@ table.list_lat {
     }
 }
 
-.card-image img{
+.card-image-tutorial img{
     height: 55px;
     margin: 10px;
+}
+
+.card-image-forum{
+    width: 20px;
 }
 
 @media screen and (max-width: 993px) {
@@ -129,7 +137,7 @@ table.list_lat {
         }
     }
 
-    .card-image{
+    .card-image-tutorial{
         img {
             height: 35px;
             margin: 10px;

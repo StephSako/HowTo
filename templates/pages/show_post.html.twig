@@ -19,9 +19,9 @@
     {% else %}
         {{ form_start(form) }}
             {{ form_row(form.content) }}
-            <button class="btn waves-effect waves-light blue lighten-2">Poster</button><br>
+            <button class="btn waves-effect waves-light blue lighten-2">Poster</button>
         {{ form_end(form) }}
-    {% endif %}
+    {% endif %}<br>
 
     {% for comment in answers_post %}
         {{ comment_m.show(comment) }}

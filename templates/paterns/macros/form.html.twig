@@ -1,5 +1,6 @@
 {% macro post(form, button) %}
-    <div class="container" style="margin-right: 20%; margin-left: 20%;  margin-top: 3%;">
+    <div class="container">
+        <h4>{{ button }}</h4>
         {{ form_start(form) }}
             {{ form_row(form.title) }}
             {{ form_row(form.content) }}
@@ -8,13 +9,13 @@
                 {{ form_row(form.idCategory) }}
             {% endif %}
 
-            <button class="btn waves-effect waves-light blue lighten-2">{{ button }}</button>
+            <br><button class="btn waves-effect waves-light blue lighten-2">{{ button }}</button><br>
         {{ form_end(form) }}
     </div>
 {% endmacro %}
 
 {% macro user(form, user, label_btn) %}
-    <div class="container" style="margin-right: 20%; margin-left: 20%;  margin-top: 3%;">
+    <div class="container">
         {% if app.request.pathinfo matches '/^\\/inscription/' %}
             <h4>{{ label_btn }}</h4>
         {% endif %}

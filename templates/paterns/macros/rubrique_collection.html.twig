@@ -59,7 +59,7 @@
                                             <td><form method="post" action="{{ path('tutorial.comment.delete', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
-                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                    <button class="btn waves-effect waves-light red lighten-2"><i class="material-icons">delete_forever</i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -97,7 +97,7 @@
                                             <td><form method="post" action="{{ path('forum.comment.delete', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
-                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                    <button class="btn waves-effect waves-light red lighten-2"><i class="material-icons">delete_forever</i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -143,7 +143,7 @@
                                             <td><form method="post" action="{{ path('deleteSuggestiontutorial', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
-                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                    <button class="btn waves-effect waves-light red lighten-2"><i class="material-icons">delete_forever</i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -179,7 +179,7 @@
                                             <td><form method="post" action="{{ path('deleteSuggestionforum', {id: data.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ data.id) }}">
-                                                    <button class="btn waves-effect waves-light red lighten-2">X</button>
+                                                    <button class="btn waves-effect waves-light red lighten-2"><i class="material-icons">delete_forever</i></button>
                                                 </form>
                                             </td>
                                         </tr>
