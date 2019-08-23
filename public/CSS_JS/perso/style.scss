@@ -11,18 +11,14 @@
 
 .coloredcard {
     margin: 5% auto;
-    width: 750px;
+    width: 100%;
     padding: 15px;
     border-radius: 15px;
 }
 
 .about {
-    width: 1000px;
+    width: 100%;
     margin: 2% auto;
-}
-
-button.button_post {
-    margin-right: 10px;
 }
 
 img {
@@ -81,6 +77,14 @@ table.list_lat {
     width: 100%;
 }
 
+.button_post{
+    margin-right: 5px;
+}
+
+.button-responsive-small{
+    display: none;
+}
+
 .nav-wrapper a.brand-logo {
     height: 64px;
     width: 64px;
@@ -91,6 +95,11 @@ table.list_lat {
         background-color: white;
         border-radius: 20px;
     }
+}
+
+.card-image img{
+    height: 55px;
+    margin: 10px;
 }
 
 @media screen and (max-width: 993px) {
@@ -105,8 +114,44 @@ table.list_lat {
 }
 
 @media screen and (max-width: 600px) {
+
+    .about {
+        text-align: center;
+    }
+
+    .coloredcard_comment{
+        .right{
+            margin-right: 3%;
+        }
+
+        .left{
+            margin-left: 3%;
+        }
+    }
+
+    .card-image{
+        img {
+            height: 35px;
+            margin: 10px;
+        }
+        width: 55px;
+    }
+
     .badge-responsive-large {
         display: none;
+    }
+
+    .button-responsive-large{
+        display: none;
+    }
+
+    .button-responsive-small{
+        display: block;
+    }
+
+    .button_post{
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .badge-responsive-small{
@@ -119,10 +164,16 @@ table.list_lat {
         height: 56px;
         width: 56px;
     }
+
+    .coloredcard_comment {
+        margin-bottom: 2%;
+        padding: 2%;
+        border-radius: 15px;
+    }
 }
 
 @media screen and (max-width: 560px) {
-        .card-action .row {
-        text-align: center;
-    }
+        .card-action .row{
+            text-align: center;
+        }
 }

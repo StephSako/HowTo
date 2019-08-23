@@ -21,6 +21,7 @@ class SuggestionTutorialType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SuggestionTutorial::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

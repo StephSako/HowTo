@@ -21,6 +21,7 @@ class SuggestionForumType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SuggestionForum::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

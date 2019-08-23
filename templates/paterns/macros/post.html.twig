@@ -5,7 +5,7 @@
         <div class="card-image valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
             {% if post.idCategory is defined %}
                 <a href="{{ path('category.list', {id: post.idCategory.id, label: post.idCategory.label }) }}" class="brand-logo center">
-                    <img class="tooltipped" data-position="top" data-tooltip="{{ post.idCategory.label }}" style="height: 55px; margin: 10px;" src="{{ asset('Images/icons_categories/' ~ post.idCategory.id ~ '.svg') }}" alt="">
+                    <img class="tooltipped" data-position="top" data-tooltip="{{ post.idCategory.label }}" src="{{ asset('Images/icons_categories/' ~ post.idCategory.id ~ '.svg') }}" alt="">
                 </a>
             {% else %}
                 <div style="width: 20px;"></div>
@@ -20,6 +20,52 @@
             <div class="card-action">
                 <div class="row" style="margin: 0">
                     <div class="col s12 m6">
+                        {{ chips.show(post.idUser) }}
+                    </div>
+                    <div class="col m6">
+                        <span class="new badge badge-responsive-large" data-badge-caption="">{{ post.datecreation|date('d/m/Y') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro card_post(type, post, nb_likes, has_liked, type) %}
+    {% import 'paterns/macros/chips.html.twig' as chips %}
+    {% import 'paterns/macros/buttons_post.html.twig' as buttons %}
+
+    <div class="button-responsive-small">
+        {{ buttons.show(post, nb_likes, has_liked, type) }}
+    </div>
+    <div class="card horizontal">
+        <div class="card-image valign-wrapper {% if post.idCategory is defined %}{{ post.idCategory.color }}{% else %}{{ 'blue lighten-3' }}{% endif %}">
+            {% if post.idCategory is defined %}
+                <a href="{{ path('category.list', {id: post.idCategory.id, label: post.idCategory.label }) }}" class="brand-logo center">
+                    <img class="tooltipped" data-position="top" data-tooltip="{{ post.idCategory.label }}" src="{{ asset('Images/icons_categories/' ~ post.idCategory.id ~ '.svg') }}" alt="">
+                </a>
+            {% else %}
+                <div style="width: 20px;"></div>
+            {% endif %}
+        </div>
+        <div class="card-stacked">
+            <span class="new badge badge-responsive-small" data-badge-caption="">{{ post.datecreation|date('d/m/Y') }}</span>
+
+            <div class="row">
+                <div class="left" style="margin-left: 5%;">
+                    <span class="card-title">{{ post.title }}</span>
+                </div>
+                <div class="right button-responsive-large" style="margin-right: 2%; margin-top: 1%;">
+                    {{ buttons.show(post, nb_likes, has_liked, type) }}
+                </div>
+            </div>
+
+            <div class="card-content">
+                <p>{{ post.content|raw|nl2br }}</p>
+            </div>
+            <div class="card-action">
+                <div class="row" style="margin: 0">
+                    <div class="col s12 m6 left">
                         {{ chips.show(post.idUser) }}
                     </div>
                     <div class="col m6">

@@ -1,50 +1,30 @@
 {% extends 'paterns/base_triptych.html.twig' %}
 {% import 'paterns/macros/comment.twig' as comment_m %}
-{% import 'paterns/macros/buttons_post.html.twig' as buttons %}
 {% import 'paterns/macros/chips.html.twig' as chips %}
+{% import 'paterns/macros/post.html.twig' as _post %}
 
 {% block title %}
     {{ details_post.title }}
-{%  endblock %}
+{% endblock %}
 
 {% block body %}
 
-    <div class="coloredcard blue lighten-4">
+    {{ _post.card_post('tutorial', details_post, nb_likes, has_liked, type) }}
 
-        <div class="row">
-            <div class="left">
-                <legend><b>{{ details_post.title }}</b></legend>
-            </div>
-            {% if not app.user is empty %}
-                {{ buttons.show(details_post, nb_likes, has_liked, type) }}
-            {% endif %}
-        </div>
+    {% if app.user is empty %}
+        <a href="{{ path('connexion') }}">
+            <br>
+            <button class="btn waves-effect waves-light center" type="submit" name="action">Se connecter pour ajouter un commentaire</button>
+        </a>
+    {% else %}
+        {{ form_start(form) }}
+            {{ form_row(form.content) }}
+            <button class="btn waves-effect waves-light blue lighten-2">Poster</button><br>
+        {{ form_end(form) }}
+    {% endif %}
 
-        {{ chips.show(details_post.idUser) }}
-        <span class="new badge" data-badge-caption="">Posté le {{ details_post.datecreation|date('d/m/Y') }}</span>
-
-        {% if details_post.idCategory is defined %}
-            <span class="new badge red" data-badge-caption="">{{ details_post.idCategory.label }}</span>
-        {% endif %}
-
-        <br>{{ details_post.content|nl2br }}<br>
-    </div>
-
-    <div class="container">
-        {% if app.user is empty %}
-            <a href="{{ path('connexion') }}">
-                <br><button class="btn waves-effect waves-light center" type="submit" name="action">Se connecter pour ajouter un commentaire</button>
-            </a>
-        {% else %}
-            {{ form_start(form) }}
-                {{ form_row(form.content) }}
-                <button class="btn waves-effect waves-light blue lighten-2">Poster</button>
-            {{ form_end(form) }}
-        {% endif %}
-
-        {% for comment in answers_post %}
-            {{ comment_m.show(comment) }}
-        {% endfor %}
-    </div>
+    {% for comment in answers_post %}
+        {{ comment_m.show(comment) }}
+    {% endfor %}
 
 {% endblock %}
