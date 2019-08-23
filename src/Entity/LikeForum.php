@@ -16,7 +16,8 @@ class LikeForum
 
     public function __construct(User $user, Forum $forum)
     {
-        $this->setIdUser($user)
+        $this
+            ->setIdUser($user)
             ->setIdForum($forum);
     }
 

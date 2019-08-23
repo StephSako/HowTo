@@ -57,6 +57,10 @@ legend {
   box-shadow: 0 0 0 transparent;
 }
 
+.badge-responsive-small {
+  display: none;
+}
+
 table.list_lat {
   margin-top: 10px;
   border-radius: 8px;
@@ -85,18 +89,29 @@ table.list_lat th {
   .list_lat {
     display: none;
   }
+
+  .cards-homes {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 @media screen and (max-width: 600px) {
+  .badge-responsive-large {
+    display: none;
+  }
+
+  .badge-responsive-small {
+    display: block;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+
   .nav-wrapper a.brand-logo {
     height: 56px;
     width: 56px;
   }
 }
 @media screen and (max-width: 560px) {
-  .card-action .badge {
-    display: none;
-  }
-
   .card-action .row {
     text-align: center;
   }

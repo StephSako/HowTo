@@ -42,7 +42,7 @@
                 {% for tuto in tutorials %}
                     <tr>
                         <td>#{{ tuto.id }}</td>
-                        <td>{{ tuto.title }}</td>
+                        <td><a href="{{ path('tutorial.details', {id: tuto.id, slug: tuto.slug }) }}">{{ tuto.title }}</a></td>
                         <td>{{ tuto.idCategory.label }}</td>
                         <td>{{ tuto.idUser.firstname }} {{ tuto.idUser.lastname }}</td>
                         <td>{{ tuto.datecreation|date("d/m/Y") }}</td>

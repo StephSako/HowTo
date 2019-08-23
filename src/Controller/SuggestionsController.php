@@ -51,8 +51,9 @@ class SuggestionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($suggestionForum);
             $this->em->flush();
-            $this->addFlash('success', 'Votre suggestion a été envoyée. Merci !');
-            return $this->redirectToRoute('forum.details');
+            return $this->redirectToRoute('forum.details', [
+                'id' => $forum->getId(),
+                'slug' => $forum->getSlug()]);
         }
 
         return $this->render('pages/suggestion.html.twig', [
@@ -77,8 +78,9 @@ class SuggestionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($suggestionTutorial);
             $this->em->flush();
-            $this->addFlash('success', 'Votre suggestion a été envoyée. Merci !');
-            return $this->redirectToRoute('tutorial.details');
+            return $this->redirectToRoute('tutorial.details', [
+                'id' => $tutorial->getId(),
+                'slug' => $tutorial->getSlug()]);
         }
 
         return $this->render('pages/suggestion.html.twig', [

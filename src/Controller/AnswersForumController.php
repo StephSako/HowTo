@@ -37,11 +37,10 @@ class AnswersForumController extends AbstractController {
             $this->em->remove($answerForum);
             $this->em->flush();
             $this->addFlash('success', 'Commentaire supprimé');
-            return $this->redirectToRoute('myaccount.home');
         }
         else{
             $this->addFlash('error', "Le commentaire n'a pas été supprimé !");
-            return $this->redirectToRoute('myaccount.home');
         }
+        return $this->redirectToRoute('myaccount.home');
     }
 }
