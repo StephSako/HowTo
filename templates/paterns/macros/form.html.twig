@@ -22,8 +22,7 @@
         {{ form_start(form) }}
 
             {% if user is not null %}
-                <img style="width: 30%;" src="{{ vich_uploader_asset(user, 'imageFile') }}"
-                     alt="Profil picture ~ {{ user.lastname ~ ' ' ~ user.firstname }}">
+                <img style="width: 20%; margin: 0 auto" src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Profil picture ~ {{ user.lastname ~ ' ' ~ user.firstname }}">
             {% endif %}
 
             {{ form_row(form.imageFile) }}
@@ -42,7 +41,7 @@
             </div>
 
             {{ form_row(form.mail) }}
-            {{ form_row(form.password) }}
+            {% if form.password is defined %}{{ form_row(form.password) }}{% endif %}
 
             <br><button class="btn waves-effect waves-light light-blue darken-1">{{ label_btn }}</button>
         {{ form_end(form) }}

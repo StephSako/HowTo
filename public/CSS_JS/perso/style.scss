@@ -121,6 +121,13 @@ table {
     }
 }
 
+@media screen and (min-width: 994px) {
+    .card-content{
+        min-height: 111px;
+    }
+;
+}
+
 @media screen and (max-width: 600px) {
 
     .about {

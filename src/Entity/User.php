@@ -103,7 +103,8 @@ class User implements UserInterface, Serializable
      *      min = 8,
      *      max = 30,
      *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} letttres",
-     *      maxMessage = "Votre mot de passe doit contenir au maximum {{ limit }} letttres"
+     *      maxMessage = "Votre mot de passe doit contenir au maximum {{ limit }} letttres",
+     *      groups={"Default"}
      *     )
      *
      * @ORM\Column(name="is_Admin", type="boolean", nullable=false)
@@ -129,6 +130,7 @@ class User implements UserInterface, Serializable
     {
         return $this->filename;
     }
+
     /**
      * @param string|null $filename
      */
@@ -225,6 +227,7 @@ class User implements UserInterface, Serializable
             $this->getPassword()
         ]);
     }
+
     /**
      * Constructs the object
      * @link https://php.net/manual/en/serializable.unserialize.php
@@ -244,6 +247,7 @@ class User implements UserInterface, Serializable
             $this->password
             ) = unserialize($serialized, ['allowed_classes' => false]);
     }
+
     /**
      * Returns the roles granted to the user.
      *
@@ -260,15 +264,13 @@ class User implements UserInterface, Serializable
      */
     public function getRoles()
     {
-        if ($this->getIsAdmin())
-        {
+        if ($this->getIsAdmin()) {
             return ['ROLE_ADMIN', 'ROLE_USER'];
-        }
-        else
-        {
+        } else {
             return ['ROLE_USER'];
         }
     }
+
     /**
      * Returns the salt that was originally used to encode the password.
      *
@@ -280,6 +282,7 @@ class User implements UserInterface, Serializable
     {
         return null; // bcrypt manage it internally
     }
+
     /**
      * Returns the username used to authenticate the user.
      *
@@ -289,6 +292,7 @@ class User implements UserInterface, Serializable
     {
         return $this->mail;
     }
+
     /**
      * Removes sensitive data from the user.
      *
@@ -298,6 +302,7 @@ class User implements UserInterface, Serializable
     public function eraseCredentials()
     {
     }
+
     /**
      * @return File|null
      */
@@ -305,6 +310,7 @@ class User implements UserInterface, Serializable
     {
         return $this->imageFile;
     }
+
     /**
      * @param File|null $imageFile
      * @return User
@@ -322,9 +328,9 @@ class User implements UserInterface, Serializable
     /**
      * @return string
      */
-    public function getSlug():string
+    public function getSlug(): string
     {
-        return (new Slugify())->slugify($this->getLastname().' '.$this->getFirstname().' '.$this->getId(), '_');
+        return (new Slugify())->slugify($this->getLastname() . ' ' . $this->getFirstname() . ' ' . $this->getId(), '_');
     }
 
 }

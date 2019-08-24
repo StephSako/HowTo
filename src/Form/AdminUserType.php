@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,10 +24,6 @@ class AdminUserType extends AbstractType
             ->add('imageFile', FileType::class,[
                 'required' => false
             ])
-            ->add('password', PasswordType::class,[
-                'required' => false,
-                'attr' => ['class' => 'htl', 'data-length' => 30]
-            ])
             ->add('isAdmin', CheckboxType::class,[
                 'required' => false,
                 'label' => false
@@ -39,7 +34,8 @@ class AdminUserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'translation_domain' => 'forms'
+            'translation_domain' => 'forms',
+            'validation_groups' => array('edit'),
         ]);
     }
 }

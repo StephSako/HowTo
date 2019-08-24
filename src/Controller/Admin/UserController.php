@@ -75,18 +75,14 @@ class UserController extends AbstractController {
      * @Route("/admin/user/edit/{id}", name="admin.user.edit")
      * @param User $user
      * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
      * @return Response
      */
-    public function edit(User $user, Request $request, UserPasswordEncoderInterface $encoder) : Response
+    public function edit(User $user, Request $request) : Response
     {
         $form = $this->createForm(AdminUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $password = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
-
             $this->em->flush();
             $this->addFlash('success', 'Utilisateur modifié avec succès !');
             return $this->redirectToRoute('admin.users.index');
