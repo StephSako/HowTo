@@ -3,8 +3,8 @@
 }*/
 .coloredcard_comment {
   background-color: #C0D6E4;
-  margin-bottom: 20px;
-  padding: 15px;
+  margin-bottom: 15px;
+  padding: 1% 2% 3px 2%;
   border-radius: 15px;
 }
 
@@ -165,10 +165,18 @@ table {
     padding: 2%;
     border-radius: 15px;
   }
+
+  table.admin-users thead {
+    display: none;
+  }
 }
 @media screen and (max-width: 560px) {
   .card-action .row {
     text-align: center;
+  }
+
+  .coloredcard_comment .left span {
+    font-size: 80%;
   }
 }
 

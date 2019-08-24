@@ -68,7 +68,7 @@ class ReportController extends AbstractController
             $this->em->persist($report);
             $this->em->flush();
             $this->addFlash('successreport', 'Merci. Nous traiterons votre demande dans les plus brefs délais.');
-            return $this->redirectToRoute('tutorials.showTutorials');
+            return $this->redirectToRoute('home.tutorials');
         }
 
         return $this->render('pages/signalement_form.html.twig', [
@@ -92,7 +92,7 @@ class ReportController extends AbstractController
             $this->em->persist($report);
             $this->em->flush();
             $this->addFlash('successreport', 'Merci. Nous traiterons votre demande dans les plus brefs délais.');
-            return $this->redirectToRoute('forums.showForums');
+            return $this->redirectToRoute('home.forums');
         }
 
         return $this->render('pages/signalement_form.html.twig', [

@@ -11,20 +11,20 @@
 
     {{ _post.card_post('tutorial', details_post, nb_likes, has_liked, type) }}
 
+    {% for comment in answers_post %}
+        {{ comment_m.show(comment) }}
+    {% endfor %}
+
+    <br>
     {% if app.user is empty %}
         <a href="{{ path('connexion') }}">
-            <br>
-            <button class="btn waves-effect waves-light center" type="submit" name="action">Se connecter pour ajouter un commentaire</button>
+            <br><button class="btn waves-effect waves-light center" type="submit" name="action">Se connecter et commenter</button>
         </a>
     {% else %}
         {{ form_start(form) }}
             {{ form_row(form.content) }}
             <button class="btn waves-effect waves-light blue lighten-2">Poster</button>
         {{ form_end(form) }}
-    {% endif %}<br>
-
-    {% for comment in answers_post %}
-        {{ comment_m.show(comment) }}
-    {% endfor %}
+    {% endif %}
 
 {% endblock %}

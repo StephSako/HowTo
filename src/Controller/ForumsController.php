@@ -95,8 +95,7 @@ class ForumsController extends AbstractController
             else $has_liked = true;
         } else $has_liked = false;
 
-        $answers_post = $this->afr->findAnswerForums($forum);
-
+        $answers_post = $this->afr->findBy(array('idForum' => $forum), array('dateresponse' => 'ASC'));
         $comment = new AnswerForum($this->getUser(), $forum);
         $form = $this->createForm(AnswerForumType::class, $comment);
         $form->handleRequest($request);
@@ -139,7 +138,7 @@ class ForumsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($forum);
             $this->em->flush();
-            return $this->redirectToRoute('forums.showForums');
+            return $this->redirectToRoute('home.forums');
         }
 
         return $this->render('pages/new.html.twig', [

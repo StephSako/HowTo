@@ -6,7 +6,7 @@
                 {{ chips.show(comment.idUser) }}<br>{{ comment.content|nl2br }}
             </div>
             <div class="right">
-                <span class="new badge" data-badge-caption="">Posté le {{ comment.dateResponse|date("d/m/Y") }}</span>
+                <span class="new badge" data-badge-caption="">{{ comment.dateResponse|date("d/m/Y") }}</span>
             </div>
         </div>
     </div>

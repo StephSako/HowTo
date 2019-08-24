@@ -58,39 +58,34 @@ class HomeController extends AbstractController {
     }
 
     /**
-     * @Route("/", name="tutorials.showTutorials")
+     * @Route("/", name="home.tutorials")
      * @return Response
      */
-    public function showTutorials() : Response
+    public function tutorials() : Response
     {
-        $latest_tutorials_body = $this->tr->findTutorials_OB_L(4, 'datecreation');
         $all = $this->tr->findAll();
 
         return $this->render('pages/homes.html.twig', [
             'categories' => $this->categories,
             'latest_posts_tutorials' => $this->latest_posts_tutorials,
             'latest_posts_forums' => $this->latest_posts_forums,
-            'latest_posts_body' => $latest_tutorials_body,
             'all' => $all,
             'current_menu' => 'tutorial'
         ]);
     }
 
     /**
-     * @Route("/forums", name="forums.showForums")
+     * @Route("/forums", name="home.forums")
      * @return Response
      */
-    public function showForums() : Response
+    public function forums() : Response
     {
-        // Contenu du body
-        $latest_forums_body = $this->fr->findForums_OB_L(4, 'datecreation');
         $all = $this->fr->findAll();
 
         return $this->render('pages/homes.html.twig', [
             'categories' => $this->categories,
             'latest_posts_tutorials' => $this->latest_posts_tutorials,
             'latest_posts_forums' => $this->latest_posts_forums,
-            'latest_posts_body' => $latest_forums_body,
             'all' => $all,
             'current_menu' => 'forum'
         ]);

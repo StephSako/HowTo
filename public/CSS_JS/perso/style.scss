@@ -4,8 +4,8 @@
 
 .coloredcard_comment {
     background-color: #C0D6E4;
-    margin-bottom: 20px;
-    padding: 15px;
+    margin-bottom: 15px;
+    padding: 1% 2% 3px 2%;
     border-radius: 15px;
 }
 
@@ -58,7 +58,7 @@ legend {
     box-shadow: 0 0 0 transparent;
 }
 
-.badge-responsive-small{
+.badge-responsive-small {
     display: none;
 }
 
@@ -77,15 +77,15 @@ table.list_lat {
     width: 100%;
 }
 
-.button_post{
+.button_post {
     margin-right: 5px;
 }
 
-.button-responsive-small{
+.button-responsive-small {
     display: none;
 }
 
-table{
+table {
     margin-bottom: 5%;
 }
 
@@ -101,12 +101,12 @@ table{
     }
 }
 
-.card-image-tutorial img{
+.card-image-tutorial img {
     height: 55px;
     margin: 10px;
 }
 
-.card-image-forum{
+.card-image-forum {
     width: 20px;
 }
 
@@ -115,7 +115,7 @@ table{
         display: none;
     }
 
-    .cards-homes{
+    .cards-homes {
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -127,21 +127,22 @@ table{
         text-align: center;
     }
 
-    .coloredcard_comment{
-        .right{
+    .coloredcard_comment {
+        .right {
             margin-right: 3%;
         }
 
-        .left{
+        .left {
             margin-left: 3%;
         }
     }
 
-    .card-image-tutorial{
+    .card-image-tutorial {
         img {
             height: 35px;
             margin: 10px;
         }
+
         width: 55px;
     }
 
@@ -149,20 +150,20 @@ table{
         display: none;
     }
 
-    .button-responsive-large{
+    .button-responsive-large {
         display: none;
     }
 
-    .button-responsive-small{
+    .button-responsive-small {
         display: block;
     }
 
-    .button_post{
+    .button_post {
         margin-top: 10px;
         margin-bottom: 10px;
     }
 
-    .badge-responsive-small{
+    .badge-responsive-small {
         display: block;
         margin-left: 3%;
         margin-right: 3%;
@@ -178,10 +179,20 @@ table{
         padding: 2%;
         border-radius: 15px;
     }
+
+    table.admin-users {
+        thead {
+            display: none;
+        }
+    }
 }
 
 @media screen and (max-width: 560px) {
-        .card-action .row{
-            text-align: center;
-        }
+    .card-action .row {
+        text-align: center;
+    }
+
+    .coloredcard_comment .left span {
+        font-size: 80%;
+    }
 }

@@ -13,14 +13,14 @@
             <span class="new badge badge-responsive-small" data-badge-caption="">{{ post.datecreation|date('d/m/Y') }}</span>
             <span style="margin-left: 3%;" class="card-title"><a href="{{ path(type ~ '.details', {id: post.id, slug: post.slug }) }}">{{ post.title }}</a></span>
             <div class="card-content">
-                <p>{{ post.content|raw|nl2br|truncate(200, true, '...') }}</p>
+                <p>{{ post.content|raw|nl2br|truncate(70, true, ' ...') }}</p>
             </div>
             <div class="card-action">
                 <div class="row" style="margin: 0">
-                    <div class="col s12 m6">
+                    <div class="left">
                         {{ chips.show(post.idUser) }}
                     </div>
-                    <div class="col m6">
+                    <div class="right">
                         <span class="new badge badge-responsive-large" data-badge-caption="">{{ post.datecreation|date('d/m/Y') }}</span>
                     </div>
                 </div>

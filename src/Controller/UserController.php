@@ -46,7 +46,7 @@ class UserController extends AbstractController {
 
             $this->em->flush();
             $this->addFlash('success', 'Votre compte a été modifié avec succès !');
-            return $this->redirectToRoute('tutorials.showTutorials');
+            return $this->redirectToRoute('home.tutorials');
         }
 
         return $this->render('pages/edit.html.twig', [

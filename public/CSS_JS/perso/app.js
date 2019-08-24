@@ -25,3 +25,7 @@ $(document).ready(function(){
         draggable : true
     });
 });
+
+$(document).ready(function() {
+    $('.htl').characterCounter();
+});

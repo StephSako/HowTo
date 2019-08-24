@@ -1,7 +1,7 @@
 <!-- Sidenav Structure -->
 <ul class="sidenav" id="sidenav">
     <li>
-        <a href="{{ path('tutorials.showTutorials')}}"><i class="material-icons left">home</i>Accueil</a>
+        <a href="{{ path('home.tutorials')}}"><i class="material-icons left">home</i>Accueil</a>
     </li>
     <li {% if current_menu is defined and current_menu == 'posts' %}class="active"{% endif %}>
         <a href="{{ path('admin.home.index')}}"><i class="material-icons left">add_to_queue</i>Posts</a>
@@ -32,7 +32,7 @@
         <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down">
             <li>
-                <a href="{{ path('tutorials.showTutorials')}}"><i class="material-icons left">home</i>Accueil</a>
+                <a href="{{ path('home.tutorials')}}"><i class="material-icons left">home</i>Accueil</a>
             </li>
             <li {% if current_menu is defined and current_menu == 'posts' %}class="active"{% endif %}>
                 <a href="{{ path('admin.home.index')}}"><i class="material-icons left">add_to_queue</i>Posts</a>

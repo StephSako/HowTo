@@ -86,8 +86,7 @@ class TutorialController extends AbstractController
                 $has_liked = true;
         }
 
-        $answers_post = $this->atr->findAnswerTutorials($tutorial);
-
+        $answers_post = $this->atr->findBy(array('idTutorial' => $tutorial), array('dateresponse' => 'ASC'));
         $comment = new AnswerTutorial($this->getUser(), $tutorial);
         $form = $this->createForm(AnswerTutorialType::class, $comment);
         $form->handleRequest($request);
@@ -126,7 +125,7 @@ class TutorialController extends AbstractController
             $this->em->persist($tutorial);
             $this->em->flush();
             $this->addFlash('success', 'Tutoriel créé avec succès !');
-            return $this->redirectToRoute('tutorials.showTutorials');
+            return $this->redirectToRoute('home.tutorials');
         }
 
         return $this->render('pages/new.html.twig', [

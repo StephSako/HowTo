@@ -17,14 +17,17 @@ class AdminUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastname', TextType::class)
-            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class,[
+                'attr' => ['class' => 'htl', 'data-length' => 30]])
+            ->add('firstname', TextType::class,[
+                'attr' => ['class' => 'htl', 'data-length' => 30]])
             ->add('mail', EmailType::class)
             ->add('imageFile', FileType::class,[
                 'required' => false
             ])
             ->add('password', PasswordType::class,[
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'htl', 'data-length' => 30]
             ])
             ->add('isAdmin', CheckboxType::class,[
                 'required' => false,

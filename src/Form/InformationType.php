@@ -15,7 +15,8 @@ class InformationType extends AbstractType
         $builder->add('content', TextType::class,[
             'required' => true,
             'data' => false,
-            'label' => 'Votre message'
+            'label' => 'Votre message',
+            'attr' => ['class' => 'htl', 'data-length' => 240]
         ]);
     }
 

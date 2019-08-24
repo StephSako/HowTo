@@ -19,18 +19,4 @@ class AnswerTutorialRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, AnswerTutorial::class);
     }
-
-    /**
-     * @param Tutorial $id
-     * @return AnswerTutorial[]
-     */
-    public function findAnswerTutorials(Tutorial $id):array
-    {
-        return $this->createQueryBuilder('at')
-            ->where('at.idTutorial = :id')
-            ->setParameter('id', $id)
-            ->orderBy('at.dateresponse', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
 }

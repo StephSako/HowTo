@@ -18,16 +18,16 @@
 <!-- Sidenav Structure -->
 <ul class="sidenav" id="sidenav">
     <li {% if current_menu is defined and current_menu == 'tutorial' %}class="active"{% endif %}>
-        <a href="{{ path('tutorials.showTutorials') }}">Tutoriels</a>
+        <a href="{{ path('home.tutorials') }}">Tutoriels</a>
     </li>
     <li {% if current_menu is defined and current_menu == 'forum' %}class="active"{% endif %}>
-        <a href="{{ path('forums.showForums') }}">Forums</a>
+        <a href="{{ path('home.forums') }}">Forums</a>
     </li>
     <li class="divider"></li>
     <li>
         <nav class="white search_nav">
             <div class="nav-wrapper">
-                <form method="GET" action="{{ path('tutorials.showTutorials') }}">
+                <form method="GET" action="{{ path('home.tutorials') }}">
                     <div class="input-field">
                         <input type="search" placeholder="Rechercher" name="search">
                         <label class="label-icon"><i class="material-icons">search</i></label>
@@ -75,21 +75,21 @@
     <div class="nav-wrapper">
         <!-- Sidenav Trigger -->
         <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <a href="{{ path('tutorials.showTutorials') }}" class="brand-logo center">
+        <a href="{{ path('home.tutorials') }}" class="brand-logo center">
             <img src="{{ asset('Images/icon2.png') }}" alt="logo"/>
         </a>
 
         <ul class="left hide-on-med-and-down">
             <li {% if current_menu is defined and current_menu == 'tutorial' %}class="active"{% endif %}>
-                <a href="{{ path('tutorials.showTutorials') }}">Tutoriels</a>
+                <a href="{{ path('home.tutorials') }}">Tutoriels</a>
             </li>
             <li {% if current_menu is defined and current_menu == 'forum' %}class="active"{% endif %}>
-                <a href="{{ path('forums.showForums') }}">Forums</a>
+                <a href="{{ path('home.forums') }}">Forums</a>
             </li>
             <li>
                 <nav class="blue lighten-2 search_nav">
                     <div class="nav-wrapper">
-                        <form method="GET" action="{{ path('tutorials.showTutorials') }}">
+                        <form method="GET" action="{{ path('home.tutorials') }}">
                             <div class="input-field">
                                 <input type="search" placeholder="Rechercher" name="search">
                                 <label class="label-icon"><i class="material-icons">search</i></label>

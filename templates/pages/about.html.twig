@@ -1,4 +1,5 @@
 {% extends 'paterns/base.html.twig' %}
+{% import 'paterns/macros/flash.html.twig' as flash %}
 
 {% block title %}
     A propos
@@ -7,9 +8,7 @@
 {% block body %}
 
     {% for message in app.flashes('success') %}
-        <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-            {{ message }}
-        </div>
+        {{ flash.success(message)}}
     {% endfor %}
 
     <div class="container coloredcard about blue lighten-3">

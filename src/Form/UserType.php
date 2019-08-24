@@ -16,13 +16,17 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastname', TextType::class)
-            ->add('firstname', TextType::class)
+            ->add('lastname', TextType::class,[
+                'attr' => ['class' => 'htl', 'data-length' => 30]]
+            )
+            ->add('firstname', TextType::class,[
+                'attr' => ['class' => 'htl', 'data-length' => 30]])
             ->add('mail', EmailType::class)
             ->add('imageFile', FileType::class,[
                 'required' => false
             ])
-            ->add('password', PasswordType::class);
+            ->add('password', PasswordType::class,[
+                'attr' => ['class' => 'htl', 'data-length' => 30]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,4 +1,5 @@
 {% extends 'paterns/base.html.twig' %}
+{% import 'paterns/macros/flash.html.twig' as flash %}
 
 {% block title %}
     Gérer les posts
@@ -8,15 +9,11 @@
     <div class="container">
 
         {% for message in app.flashes('success') %}
-            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.success(message)}}
         {% endfor %}
 
         {% for message in app.flashes('error') %}
-            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.error(message)}}
         {% endfor %}
 
         <h3>Tutoriels</h3>
@@ -30,12 +27,12 @@
         <table class="centered striped highlight responsive-table">
             <thead>
                 <tr>
-                    <th></th>
+                    <th>ID</th>
                     <th>Titre</th>
                     <th>Catégorie</th>
                     <th>Créateur</th>
                     <th>Date</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -81,11 +78,11 @@
         <table class="centered striped highlight responsive-table">
             <thead>
             <tr>
-                <th></th>
+                <th>ID</th>
                 <th>Titre</th>
                 <th>Créateur</th>
                 <th>Date</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>

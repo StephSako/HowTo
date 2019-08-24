@@ -1,4 +1,5 @@
 {% extends 'paterns/base.html.twig' %}
+{% import 'paterns/macros/flash.html.twig' as flash %}
 
 {% block title %}
     Signalements
@@ -8,15 +9,11 @@
     <div class="container">
 
         {% for message in app.flashes('success') %}
-            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.success(message)}}
         {% endfor %}
 
         {% for message in app.flashes('error') %}
-            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.error(message)}}
         {% endfor %}
 
         <h3>Signalements de tutoriels</h3>
@@ -24,12 +21,12 @@
         <table class="striped centered responsive-table">
             <thead>
             <tr>
-                <th></th>
-                <th>Motif du signalement</th>
+                <th>ID</th>
+                <th>Motif</th>
                 <th>Demandeur</th>
                 <th>Tutoriel</th>
                 <th>Auteur</th>
-                <th>Date de création</th>
+                <th>Création</th>
                 <th></th>
             </tr>
             </thead>
@@ -56,29 +53,17 @@
 
     <div class="container">
 
-        {% for message in app.flashes('success') %}
-            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-        {% for message in app.flashes('error') %}
-            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
-        {% endfor %}
-
         <h3>Signalements de forums</h3>
 
         <table class="striped centered responsive-table">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Motif du signalement</th>
+                    <th>ID</th>
+                    <th>Motif</th>
                     <th>Demandeur</th>
                     <th>Forum</th>
                     <th>Auteur</th>
-                    <th>Date de création</th>
+                    <th>Création</th>
                     <th></th>
                 </tr>
             </thead>

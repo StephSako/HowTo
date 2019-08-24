@@ -17,10 +17,11 @@ class TutorialType extends AbstractType
     {
         $builder
             ->add('title', TextType::class,[
-                'attr' => ['class' => 'input-field']
+                'attr' => ['class' => 'input-field htl',
+                'data-length' => 100]
             ])
             ->add('content', TextareaType::class,[
-                'attr' => ['class' => 'materialize-textarea']
+                'attr' => ['class' => 'materialize-textarea htl', 'data-length' => 500]
             ])
             ->add('idCategory', EntityType::class, array(
                 'class' => 'App\Entity\Category',

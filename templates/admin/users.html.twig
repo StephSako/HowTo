@@ -1,4 +1,5 @@
 {% extends 'paterns/base.html.twig' %}
+{% import 'paterns/macros/flash.html.twig' as flash %}
 
 {% block title %}
     Gérer les utilisateurs
@@ -8,15 +9,11 @@
     <div class="container">
 
         {% for message in app.flashes('success') %}
-            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.success(message)}}
         {% endfor %}
 
         {% for message in app.flashes('error') %}
-            <div class="card-panel red lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.error(message)}}
         {% endfor %}
 
         <h3>Utilisateurs</h3>
@@ -27,11 +24,11 @@
             </button>
         </a><br>
 
-        <table class="centered striped highlight responsive-table">
+        <table class="centered striped highlight responsive-table admin-users">
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
+                    <th>ID</th>
+                    <th>Image</th>
                     <th>Rôle</th>
                     <th>Nom</th>
                     <th>Mail</th>
@@ -42,9 +39,12 @@
                 {% for user in users %}
                     <tr>
                         <td>#{{ user.id }}</td>
-                        <td style="width: 12%;"><img style="width: 100px;" src="{{ vich_uploader_asset(user, 'imageFile') }}"
+                        <td><figure>
+                                <img style="width: 100px;" src="{{ vich_uploader_asset(user, 'imageFile') }}"
                                  alt="{{ user.filename }}">
-                            <figcaption>{{ user.filename }}</figcaption></td>
+                            <figcaption>{{ user.filename }}</figcaption>
+                            </figure>
+                        </td>
                         <td>{% if user.isAdmin %}<span style="color: red;">{{ 'Administrateur' }}</span>{% else %}<span style="color: blue;">{{ 'Utilisateur' }}{% endif %}</td>
                         <td>{{ user.lastname ~ ' ' ~ user.firstname }}</td>
                         <td>{{ user.mail }}</td>

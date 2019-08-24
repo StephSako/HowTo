@@ -19,18 +19,4 @@ class AnswerForumRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, AnswerForum::class);
     }
-
-    /**
-     * @param Forum $id
-     * @return AnswerForum[]
-     */
-    public function findAnswerForums(Forum $id):array
-    {
-        return $this->createQueryBuilder('af')
-            ->where('af.idForum = :id')
-            ->setParameter('id', $id)
-            ->orderBy('af.dateresponse', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
 }

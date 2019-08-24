@@ -75,7 +75,6 @@ class TutorialController extends AbstractController {
             return $this->redirectToRoute('admin.home.index');
         }
 
-
         return $this->render('pages/edit.html.twig', [
             'tutorial' => $tutorial,
             'form' => $form->createView()

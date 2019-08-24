@@ -14,10 +14,11 @@ class ForumType extends AbstractType
     {
         $builder
             ->add('content', TextType::class,[
-                'attr' => ['class' => 'materialize-textarea']
+                'attr' => ['class' => 'materialize-textarea htl', 'data-length' => 500]
             ])
             ->add('title', TextType::class,[
-                'attr' => ['class' => 'input-field']
+                'attr' => ['class' => 'input-field htl',
+                    'data-length' => 100]
             ])
         ;
     }
