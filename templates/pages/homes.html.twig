@@ -10,12 +10,16 @@
     <legend>Tous les {{ current_menu ~ 's' }}</legend>
     <div class="row cards-homes">
         <div class="row">
-            {% for post in all %}
+            {% for post in posts %}
                 <div class="s12 col l6">
                     {{ _post.card(current_menu, post) }}
                 </div>
             {% endfor %}
         </div>
+    </div>
+
+    <div class="navigation center">
+        {{ knp_pagination_render(posts) }}
     </div>
 
     {% include('components/floating_button.html.twig') %}

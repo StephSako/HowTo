@@ -47,7 +47,7 @@ class CategoryController extends AbstractController
      */
     public function list($id, $label):Response
     {
-        $list_posts = $this->tr->categoryList('datecreation', $id);
+        $list_posts = $this->tr->findBy(array('idCategory' => $id), array('datecreation' => 'DESC'));
 
         return $this->render('pages/category_posts_lists.html.twig', [
             'categories' => $this->categories,

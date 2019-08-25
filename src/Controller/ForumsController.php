@@ -143,6 +143,7 @@ class ForumsController extends AbstractController
 
         return $this->render('pages/new.html.twig', [
             'forum' => $forum,
+            'categories' => $this->categories,
             'form' => $form->createView()
         ]);
     }

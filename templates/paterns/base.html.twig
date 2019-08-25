@@ -15,10 +15,8 @@
 
         {% if app.request.pathinfo matches '/^\\/admin(.*?)/' %}
             {% include('components/navbar_admin.html.twig') %}
-        {% elseif app.request.pathinfo matches '/^\\/about/' or '/^\\/compte/' %}
-            {% include('components/navbar_complete.html.twig') %}
         {% else %}
-            {% include('components/navbar_simple.html.twig') %}
+            {% include('components/navbar_complete.html.twig') %}
         {% endif %}
 
         {% block body %}{% endblock %}

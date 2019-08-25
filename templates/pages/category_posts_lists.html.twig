@@ -9,9 +9,13 @@
 
     <h4><b>{{ label }}</b></h4>
     <div class="row cards-homes">
-        {% for post in list_posts %}
-            {{ _post.card(current_menu, post) }}
-        {% endfor %}
+        <div class="row">
+            {% for post in list_posts %}
+                <div class="s12 col l6">
+                    {{ _post.card(current_menu, post) }}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
     {% include('components/floating_button.html.twig') %}

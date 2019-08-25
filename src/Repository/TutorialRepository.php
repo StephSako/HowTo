@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Tutorial;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -15,13 +16,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class TutorialRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry, ObjectManager $em)
+    public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Tutorial::class);
-        $this->em = $em;
     }
 
-    private $em;
+    /**
+     * @return Query
+     */
+    public function findAllTutos():Query
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.datecreation', 'DESC')
+            ->getQuery();
+    }
 
     /**
      * @param int $nb
@@ -33,21 +41,6 @@ class TutorialRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->orderBy('t.' . $ob_param, 'DESC')
             ->setMaxResults($nb)
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @param string $ob_param
-     * @param int $id_cat
-     * @return Tutorial[]
-     */
-    public function categoryList(string $ob_param, int $id_cat):array
-    {
-        return $this->createQueryBuilder('t')
-            ->where('t.idCategory = :id_cat')
-            ->orderBy('t.' . $ob_param, 'DESC')
-            ->setParameter('id_cat', $id_cat)
             ->getQuery()
             ->getResult();
     }

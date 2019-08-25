@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Forum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +18,16 @@ class ForumRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Forum::class);
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllForums():Query
+    {
+        return $this->createQueryBuilder('f')
+            ->orderBy('f.datecreation', 'DESC')
+            ->getQuery();
     }
 
     /**

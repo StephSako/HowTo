@@ -130,6 +130,7 @@ class TutorialController extends AbstractController
 
         return $this->render('pages/new.html.twig', [
             'tutorial' => $tutorial,
+            'categories' => $this->categories,
             'form' => $form->createView()
         ]);
     }

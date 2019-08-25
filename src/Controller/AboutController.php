@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Informations;
 use App\Form\InformationType;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,10 +18,15 @@ class AboutController extends AbstractController {
      * @var ObjectManager
      */
     private $em;
+    /**
+     * @var CategoryRepository
+     */
+    private $cr;
 
-    public function __construct(ObjectManager $em)
+    public function __construct(ObjectManager $em, CategoryRepository $cr)
     {
         $this->em = $em;
+        $this->cr = $cr;
     }
 
     /**
@@ -44,6 +50,7 @@ class AboutController extends AbstractController {
 
         return $this->render('pages/about.html.twig',[
             'form' => $form->createView(),
+            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
             'info' => $info
         ]);
     }
