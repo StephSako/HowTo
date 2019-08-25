@@ -24,7 +24,7 @@
             </button>
         </a><br>
 
-        <table class="centered striped highlight responsive-table">
+        <table class="centered striped highlight responsive-table tstbd">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -40,7 +40,7 @@
                     <tr>
                         <td>#{{ tuto.id }}</td>
                         <td><a href="{{ path('tutorial.details', {id: tuto.id, slug: tuto.slug }) }}">{{ tuto.title }}</a></td>
-                        <td>{{ tuto.idCategory.label }}</td>
+                        <td><a href="{{ path('category.list', {id: tuto.idCategory.id, label: tuto.idCategory.label }) }}">{{ tuto.idCategory.label }}</a></td>
                         <td>{{ tuto.idUser.firstname }} {{ tuto.idUser.lastname }}</td>
                         <td>{{ tuto.datecreation|date("d/m/Y") }}</td>
                         <td>
@@ -75,7 +75,7 @@
             </button>
         </a><br>
 
-        <table class="centered striped highlight responsive-table">
+        <table class="centered striped highlight responsive-table tstbd">
             <thead>
             <tr>
                 <th>ID</th>

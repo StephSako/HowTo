@@ -3,6 +3,7 @@
     <li>
         <a href="{{ path('home.tutorials')}}"><i class="material-icons left">home</i>Accueil</a>
     </li>
+    <li class="divider"></li>
     <li {% if current_menu is defined and current_menu == 'posts' %}class="active"{% endif %}>
         <a href="{{ path('admin.home.index')}}"><i class="material-icons left">add_to_queue</i>Posts</a>
     </li>

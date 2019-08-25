@@ -36,30 +36,43 @@
             </div>
         </nav>
     </li>
+
     <li class="divider"></li>
+
+    {% if app.user is null %}
+        <li><a href="{{ path('connexion') }}">Se connecter</a></li>
+        <li><a href="{{ path('inscription') }}">S'inscrire</a></li>
+    {% else %}
+        <li class="center">{{ chips.show(app.user) }}</li>
+        <li><a href="{{ path('myaccount.home') }}">Mon compte</a></li>
+        {% if 'ROLE_ADMIN' in app.token.roleNames %}
+            <li><a href="{{ path('admin.home.index') }}">Administration</a></li>
+        {% endif %}
+        <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+    {% endif %}
+
+    <li class="divider"></li>
+
     <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
             <li>
-                <a class="collapsible-header">{% if not app.user is null %}
-                                                    {{ chips.show(app.user) }}
-                                                {% else %}
-                                                    {{ 'Compte' }}
-                                                {% endif %}
-                    <i class="material-icons">arrow_drop_down</i>
-                </a>
+                <a class="collapsible-header">Catégories<i class="material-icons">arrow_drop_down</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        {% if app.user is null %}
-                            <li><a href="{{ path('connexion') }}">Se connecter</a></li>
-                            <li><a href="{{ path('inscription') }}">S'inscrire</a></li>
-                        {% else %}
-                            <li><a href="{{ path('myaccount.home') }}">Mon compte</a></li>
-                            {% if 'ROLE_ADMIN' in app.token.roleNames %}
-                                <li><a href="{{ path('admin.home.index') }}">Administration</a></li>
-                            {% endif %}
-                            <li class="divider"></li>
-                            <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
-                        {% endif %}
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ path('category.list', {id: category.id, label: category.label }) }}">
+                                    <div class="row">
+                                        <div class="left">
+                                            <img src="{{ asset('Images/icons_categories/' ~ category.id ~ '.svg') }}" alt="">
+                                        </div>
+                                        <div class="center">
+                                            {{ category.label }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </li>
@@ -86,6 +99,9 @@
             <li {% if current_menu is defined and current_menu == 'forum' %}class="active"{% endif %}>
                 <a href="{{ path('home.forums') }}">Forums</a>
             </li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down">
             <li>
                 <nav class="blue lighten-2 search_nav">
                     <div class="nav-wrapper">
@@ -98,9 +114,6 @@
                     </div>
                 </nav>
             </li>
-        </ul>
-
-        <ul class="right hide-on-med-and-down">
             <!-- Dropdown Trigger -->
             <li>
                 <a class="dropdown-trigger" href="#" data-target="dropdown1">

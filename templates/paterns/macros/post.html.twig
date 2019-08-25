@@ -12,7 +12,7 @@
         <div class="card-stacked">
             <span class="new badge badge-responsive-small" data-badge-caption="">{{ post.datecreation|date('d/m/Y') }}</span>
             <span style="margin-left: 3%;" class="card-title"><a href="{{ path(type ~ '.details', {id: post.id, slug: post.slug }) }}">{{ post.title|truncate(20, true, ' ...') }}</a></span>
-            <div class="card-content">
+            <div class="card-content ccpost">
                 <p>{{ post.content|raw|nl2br|truncate(70, true, ' ...') }}</p>
             </div>
             <div class="card-action">

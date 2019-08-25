@@ -1,6 +1,7 @@
 {% extends 'paterns/base.html.twig' %}
 {% import 'paterns/macros/post.html.twig' as post %}
 {% import 'paterns/macros/rubrique_collection.html.twig' as rubrique %}
+{% import 'paterns/macros/flash.html.twig' as flash %}
 
 {% block title %}
     {{ 'Mon compte' }}
@@ -10,9 +11,7 @@
     <div class="container" style="margin-top: 30px;">
 
         {% for message in app.flashes('success') %}
-            <div class="card-panel green lighten-2" style="text-align: center; margin-left: 100px; margin-right: 100px;">
-                {{ message }}
-            </div>
+            {{ flash.success(message)}}
         {% endfor %}
 
         <ul class="collapsible center popout">

@@ -44,6 +44,12 @@ img {
     margin: 1% auto;
 }
 
+.flash{
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 legend {
     font-weight: bold;
     font-size: 24px;
@@ -70,6 +76,10 @@ table.list_lat {
 
     th {
         text-align: center;
+    }
+
+    img{
+        width: 20%;
     }
 }
 
@@ -116,16 +126,15 @@ table {
     }
 
     .cards-homes {
-        padding-left: 5%;
-        padding-right: 5%;
+        padding-left: 3%;
+        padding-right: 3%;
     }
 }
 
 @media screen and (min-width: 994px) {
-    .card-content{
+    .ccpost{
         min-height: 111px;
     }
-;
 }
 
 @media screen and (max-width: 600px) {
@@ -187,14 +196,16 @@ table {
         border-radius: 15px;
     }
 
-    table.admin-users {
+    table.tstbd {
         thead {
             display: none;
         }
     }
-}
 
-@media screen and (max-width: 560px) {
+    .flash{
+        margin: 0 0 6% 0;
+    }
+
     .card-action .row {
         text-align: center;
     }

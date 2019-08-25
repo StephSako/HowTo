@@ -39,6 +39,12 @@ img #swipe_gesture {
   margin: 1% auto;
 }
 
+.flash {
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 legend {
   font-weight: bold;
   font-size: 24px;
@@ -64,6 +70,9 @@ table.list_lat {
 }
 table.list_lat th {
   text-align: center;
+}
+table.list_lat img {
+  width: 20%;
 }
 
 .card {
@@ -108,12 +117,12 @@ table {
   }
 
   .cards-homes {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
   }
 }
 @media screen and (min-width: 994px) {
-  .card-content {
+  .ccpost {
     min-height: 111px;
   }
 }
@@ -171,11 +180,14 @@ table {
     border-radius: 15px;
   }
 
-  table.admin-users thead {
+  table.tstbd thead {
     display: none;
   }
-}
-@media screen and (max-width: 560px) {
+
+  .flash {
+    margin: 0 0 6% 0;
+  }
+
   .card-action .row {
     text-align: center;
   }

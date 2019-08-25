@@ -1,11 +1,11 @@
 {% macro success(message) %}
-    <div class="card-panel green lighten-2" style="text-align: center; margin-left: 10%; margin-right: 10%;">
+    <div class="card-panel green lighten-2 flash">
         {{ message }}
     </div>
 {% endmacro %}
 
 {% macro error(message) %}
-    <div class="card-panel red lighten-2" style="text-align: center; margin-left: 10%; margin-right: 10%;">
+    <div class="card-panel red lighten-2 flash">
         {{ message }}
     </div>
 {% endmacro %}

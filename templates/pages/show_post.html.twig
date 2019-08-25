@@ -9,7 +9,7 @@
 
 {% block body %}
 
-    {{ _post.card_post('tutorial', details_post, nb_likes, has_liked, type) }}
+    {{ _post.card_post(type, details_post, nb_likes, has_liked, type) }}
 
     {% for comment in answers_post %}
         {{ comment_m.show(comment) }}
