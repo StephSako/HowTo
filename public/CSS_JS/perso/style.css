@@ -57,6 +57,7 @@ legend {
 
 .search_nav {
   box-shadow: 0 0 0 transparent;
+  width: 180px;
 }
 
 .badge-responsive-small {
@@ -194,6 +195,10 @@ table {
 
   .coloredcard_comment .left span {
     font-size: 80%;
+  }
+
+  .search_nav {
+    width: 100%;
   }
 }
 

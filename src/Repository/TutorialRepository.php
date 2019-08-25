@@ -32,6 +32,20 @@ class TutorialRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $title
+     * @return Tutorial[]
+     */
+    public function findSearchedTutorials(string $title): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where("t.title LIKE :title")
+            ->setParameter('title', '%'.$title.'%')
+            ->orderBy('t.datecreation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param int $nb
      * @param string $ob_param
      * @return Tutorial[]

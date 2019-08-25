@@ -23,7 +23,7 @@ class ForumRepository extends ServiceEntityRepository
     /**
      * @return Query
      */
-    public function findAllForums():Query
+    public function findAllForums(): Query
     {
         return $this->createQueryBuilder('f')
             ->orderBy('f.datecreation', 'DESC')
@@ -31,11 +31,25 @@ class ForumRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $title
+     * @return Forum[]
+     */
+    public function findSearchedForums(string $title): array
+    {
+        return $this->createQueryBuilder('f')
+            ->where('f.title LIKE :title')
+            ->setParameter('title', '%'.$title.'%')
+            ->orderBy('f.datecreation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param int $nb
      * @param string $ob_param
      * @return Forum[]
      */
-    public function findForums_OB_L(int $nb, string $ob_param):array
+    public function findForums_OB_L(int $nb, string $ob_param): array
     {
         return $this->createQueryBuilder('f')
             ->orderBy('f.' . $ob_param, 'DESC')

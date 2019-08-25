@@ -1,0 +1,16 @@
+{% extends 'paterns/base_triptych.html.twig' %}
+{% import 'paterns/macros/post.html.twig' as _post %}
+
+{% block title %}
+    Recherche
+{% endblock %}
+
+{% block body %}
+
+    {{ dump(searched_forums) }}
+    {{ dump(searched_tutos) }}
+    {{ dump(searched_users) }}
+
+
+    {% include('components/floating_button.html.twig') %}
+{% endblock %}
