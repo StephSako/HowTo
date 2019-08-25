@@ -57,9 +57,10 @@ class SearchController extends AbstractController {
      */
     public function index(Request $request) : Response
     {
-        $searched_tutos = $this->tutorialRepository->findSearchedTutorials($request->query->get('search'));
-        $searched_forums = $this->forumRepository->findSearchedForums($request->query->get('search'));
-        $searched_users = $this->userRepository->findSearchedUsers($request->query->get('search'));
+        $keyword = $request->query->get('search');
+        $searched_tutos = $this->tutorialRepository->findSearchedTutorials($keyword);
+        $searched_forums = $this->forumRepository->findSearchedForums($keyword);
+        $searched_users = $this->userRepository->findSearchedUsers($keyword);
 
         return $this->render('pages/search.html.twig',[
             'categories' => $this->categoryRepository->findBy(array(), array('label' => 'ASC')),
@@ -68,6 +69,7 @@ class SearchController extends AbstractController {
             'searched_tutos' => $searched_tutos,
             'searched_forums' => $searched_forums,
             'searched_users' => $searched_users,
+            'keyword' => $keyword
         ]);
     }
 }

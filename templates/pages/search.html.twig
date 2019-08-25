@@ -1,5 +1,6 @@
 {% extends 'paterns/base_triptych.html.twig' %}
 {% import 'paterns/macros/post.html.twig' as _post %}
+{% import 'paterns/macros/chips.html.twig' as chips %}
 
 {% block title %}
     Recherche
@@ -7,9 +8,50 @@
 
 {% block body %}
 
-    {{ dump(searched_forums) }}
-    {{ dump(searched_tutos) }}
-    {{ dump(searched_users) }}
+    {% if searched_tutos is empty %}
+        <blockquote>Il n'y a pas de tutoriels correspondant.</blockquote>
+    {% else %}
+        <legend>Tutoriels comportant '<b><i>{{ keyword }}</i></b>'</legend>
+        <div class="row cards-homes">
+            <div class="row">
+                {% for tutorial in searched_tutos %}
+                    <div class="s12 col l6">
+                        {{ _post.card('tutorial', tutorial) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if searched_forums is empty %}
+        <blockquote>Il n'y a pas de forums correspondant.</blockquote>
+    {% else %}
+        <legend>Forums comportant '<b><i>{{ keyword }}</i></b>'</legend>
+        <div class="row cards-homes">
+            <div class="row">
+                {% for forum in searched_forums %}
+                    <div class="s12 col l6">
+                        {{ _post.card('forum', forum) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if searched_users is empty %}
+        <blockquote>Il n'y a pas d'utilisateurs correspondant.</blockquote>
+    {% else %}
+        <legend>Pseudos comportant '<b><i>{{ keyword }}</i></b>'</legend>
+        <div class="row cards-homes search-user">
+            <div class="row">
+                {% for user in searched_users %}
+                    <div class="col s12 l3 center">
+                        {{ chips.show(user) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
 
 
     {% include('components/floating_button.html.twig') %}

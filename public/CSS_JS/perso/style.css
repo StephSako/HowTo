@@ -112,6 +112,10 @@ table {
   width: 20px;
 }
 
+.search-user .chip {
+  width: 100%;
+}
+
 @media screen and (max-width: 993px) {
   .list_lat {
     display: none;
@@ -199,6 +203,10 @@ table {
 
   .search_nav {
     width: 100%;
+  }
+
+  .search-user .chip {
+    width: auto;
   }
 }
 

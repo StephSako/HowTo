@@ -26,8 +26,6 @@ class UserRepository extends ServiceEntityRepository
     public function findSearchedUsers(string $pseudo): array
     {
         return $this->createQueryBuilder('u')
-            ->select('u.lastname')
-            ->addSelect('u.firstname')
             ->where('u.firstname LIKE :pseudo_firstname')
             ->orWhere('u.lastname LIKE :pseudo_lastname')
             ->setParameter('pseudo_firstname', '%'.$pseudo.'%')
