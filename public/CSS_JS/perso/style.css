@@ -27,16 +27,16 @@ img #illustrations {
 img #creation_illustrations {
   height: 40%;
 }
-img #swipe_gesture {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .btn, .btn-flat {
   text-align: center;
   display: block;
   margin: 1% auto;
+}
+
+.carousel {
+  display: block;
+  margin: 0 auto;
 }
 
 .flash {
@@ -78,6 +78,10 @@ table.list_lat img {
 
 .card {
   width: 100%;
+}
+
+.card:hover {
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .button_post {

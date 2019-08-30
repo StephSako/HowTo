@@ -1,5 +1,6 @@
 {% extends 'paterns/base.html.twig' %}
-{% import 'paterns/macros/form.html.twig' as form %}
+{% import 'paterns/macros/forms/user.html.twig' as user_form %}
+{% import 'paterns/macros/forms/post.html.twig' as post_form %}
 
 {% block title %}
     Modifier
@@ -7,10 +8,14 @@
 
 {% block body %}
     {% if tutorial is defined or forum is defined %}
-        {{ form.post(form, 'Modifier') }}
+        {{ post_form.post(form, 'Modifier', { post: tutorial }) }}
     {% elseif user is defined %}
-        {{ form.user(form, user, 'Modifier') }}
-    {% elseif answer is defined %}
-        {{ form.answer(form, 'Modifier') }}
+        {% if security is defined and security == 'admin' %}
+            {{ user_form.editAdmin(form, user, 'Modifier le compte') }}
+        {% elseif security is defined and security == 'user' %}
+            {{ user_form.edit(form, user, 'Modifier mon compte') }}
+        {% else %}
+            {{ user_form.new(form, user, "S'inscrire") }}
+        {% endif %}
     {% endif %}
 {%  endblock %}

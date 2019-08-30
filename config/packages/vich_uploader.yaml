@@ -8,3 +8,9 @@ vich_uploader:
             namer:
                 service: Vich\UploaderBundle\Naming\PropertyNamer
                 options: { property: 'slug'}
+        tutorial_filename:
+            uri_prefix: /Images/tutorials_pictures
+            upload_destination: '%kernel.project_dir%/public/Images/tutorials_pictures'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'slug'}

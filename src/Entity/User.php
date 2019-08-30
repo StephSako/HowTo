@@ -93,6 +93,7 @@ class User implements UserInterface, Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=100, nullable=false)
+     *
      */
     private $password;
 
@@ -104,7 +105,6 @@ class User implements UserInterface, Serializable
      *      max = 30,
      *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} letttres",
      *      maxMessage = "Votre mot de passe doit contenir au maximum {{ limit }} letttres",
-     *      groups={"Default"}
      *     )
      *
      * @ORM\Column(name="is_Admin", type="boolean", nullable=false)

@@ -29,3 +29,11 @@ $(document).ready(function(){
 $(document).ready(function() {
     $('.htl').characterCounter();
 });
+
+$(document).ready(function(){
+    $('.carousel').carousel();
+});
+
+$('.carousel.carousel-slider').carousel({
+    fullWidth: true
+});

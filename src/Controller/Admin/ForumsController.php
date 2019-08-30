@@ -69,7 +69,7 @@ class ForumsController extends AbstractController {
         }
 
         return $this->render('pages/edit.html.twig', [
-            'forum' => $forum,
+            'post' => $forum,
             'form' => $form->createView()
         ]);
     }

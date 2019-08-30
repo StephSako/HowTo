@@ -1,18 +1,33 @@
 {% extends 'paterns/base.html.twig' %}
-{% import 'paterns/macros/form.html.twig' as form %}
+{% import 'paterns/macros/forms/user.html.twig' as user_form %}
+{% import 'paterns/macros/forms/post.html.twig' as post_form %}
 
 {% block title %}
     {% if tutorial is defined %}
         {{ 'Créer un tutoriel' }}
     {% elseif forum is defined %}
         {{ 'Créer un forum' }}
+    {% elseif user is defined %}
+        {% if security is defined and security == 'admin' %}
+            {{'Modifier le compte' }}
+        {% elseif security is defined and security == 'user' %}
+            {{ 'Modifier mon compte' }}
+        {% else %}
+            {{ "S'inscrire" }}
+        {% endif %}
     {% endif %}
 {%  endblock %}
 
 {% block body %}
     {% if tutorial is defined or forum is defined %}
-        {{ form.post(form, 'Créer un post') }}
+        {{ post_form.post(form, 'Créer un post') }}
     {% elseif user is defined %}
-        {{ form.user(form, null, 'Créer un compte') }}
+        {% if security is defined and security == 'admin' %}
+            {{ user_form.editAdmin(form, null, 'Modifier le compte') }}
+        {% elseif security is defined and security == 'user' %}
+            {{ user_form.edit(form, null, 'Modifier mon compte') }}
+        {% else %}
+            {{ user_form.new(form, null, "S'inscrire") }}
+        {% endif %}
     {% endif %}
 {%  endblock %}

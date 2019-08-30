@@ -90,6 +90,7 @@ class UserController extends AbstractController {
 
         return $this->render('pages/edit.html.twig', [
             'user' => $user,
+            'security' => 'admin',
             'form' => $form->createView()
         ]);
     }

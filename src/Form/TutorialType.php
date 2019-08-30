@@ -6,6 +6,7 @@ use App\Entity\Tutorial;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,9 @@ class TutorialType extends AbstractType
             ])
             ->add('content', TextareaType::class,[
                 'attr' => ['class' => 'materialize-textarea htl', 'data-length' => 500]
+            ])
+            ->add('imageFile', FileType::class,[
+                'required' => false
             ])
             ->add('idCategory', EntityType::class, array(
                 'class' => 'App\Entity\Category',

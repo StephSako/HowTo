@@ -4,8 +4,13 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Tutorial
@@ -13,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="TUTORIAL", indexes={@ORM\Index(name="id_CATEGORY_Fk", columns={"id_CATEGORY"}), @ORM\Index(name="id_USER_T_Fk", columns={"id_USER"})})
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="App\Repository\TutorialRepository")
+ * @Vich\Uploadable
  */
 class Tutorial
 {
@@ -31,6 +37,28 @@ class Tutorial
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var string|null
+     * @ORM\Column(name="filename", type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Assert\Image(
+     *     mimeTypes="image/jpeg"
+     * )
+     * * @Vich\UploadableField(mapping="tutorial_filename", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
+     * @var DateTime|null
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @var string
@@ -61,7 +89,7 @@ class Tutorial
     private $content;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="dateCreation", type="datetime", nullable=false)
      */
@@ -92,6 +120,56 @@ class Tutorial
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string|null $filename
+     */
+    public function setFilename(?string $filename): void
+    {
+        $this->filename = $filename;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Tutorial
+     * @throws Exception
+     */
+    public function setImageFile(?File $imageFile = null): Tutorial
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->setUpdatedAt(new DateTime('now'));
+        }
+        return $this;
+    }
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -116,12 +194,12 @@ class Tutorial
         return $this;
     }
 
-    public function getDatecreation(): ?\DateTimeInterface
+    public function getDatecreation(): ?DateTimeInterface
     {
         return $this->datecreation;
     }
 
-    public function setDatecreation(\DateTimeInterface $datecreation): self
+    public function setDatecreation(DateTimeInterface $datecreation): self
     {
         $this->datecreation = $datecreation;
 

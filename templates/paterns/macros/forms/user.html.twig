@@ -1,0 +1,84 @@
+{% macro new(form, user, label_btn) %}
+    <div class="container" style="margin-top: 3%;">
+        <h4>{{ label_btn }}</h4>
+        {{ form_start(form) }}
+
+        {{ form_row(form.imageFile) }}
+
+        <div class="row">
+            <div class="col s6">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="col s6">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+
+        {{ form_row(form.mail) }}
+        {{ form_row(form.password) }}
+
+        <br><button class="btn waves-effect waves-light light-blue darken-1">{{ label_btn }}</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('connexion') }}">
+            <button class="btn waves-effect waves-teal btn-flat purple lighten-5">Se connecter</button>
+        </a>
+        <br>
+        <a href="{{ path('home.tutorials') }}">
+            <button class="btn waves-effect waves-light center">Retour à l'accueil</button>
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro editAdmin(form, user, label_btn) %}
+    <div class="container" style="margin-top: 3%;">
+
+        {{ form_start(form) }}
+
+        <img style="width: 20%; margin: 0 auto; display: block;" src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Profil picture ~ {{ user.lastname ~ ' ' ~ user.firstname }}">
+
+        {{ form_row(form.imageFile) }}
+
+        <br>{{ form_row(form.isAdmin) }}<br>
+
+        <div class="row">
+            <div class="col s6">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="col s6">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+
+        {{ form_row(form.mail) }}
+
+        <br><button class="btn waves-effect waves-light light-blue darken-1">{{ label_btn }}</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endmacro %}
+
+{% macro edit(form, user, label_btn) %}
+    <div class="container" style="margin-top: 3%;">
+        {{ form_start(form) }}
+
+        <img style="width: 20%; margin: 0 auto; display: block;" src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Profil picture ~ {{ user.lastname ~ ' ' ~ user.firstname }}">
+
+        {{ form_row(form.imageFile) }}
+
+        <div class="row">
+            <div class="col s6">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="col s6">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+
+        {{ form_row(form.mail) }}
+        {{ form_row(form.password) }}
+
+        <br><button class="btn waves-effect waves-light light-blue darken-1">{{ label_btn }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endmacro %}

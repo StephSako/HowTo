@@ -10,13 +10,17 @@
 {% block body %}
 
     {{ _post.card_post(type, details_post, nb_likes, has_liked, type) }}
+    {% if type == 'tutorial' and details_post.filename|length > 0 %}
+        <div class="carousel carousel-slider">
+            <a class="carousel-item" href="#one!"><img src="{{ vich_uploader_asset(details_post, 'imageFile') }}" alt=""></a>
+        </div><br>
+    {% endif %}
 
     {% for comment in answers_post %}
         {{ comment_m.show(comment) }}
     {% endfor %}
 
-    <br>
-    {% if app.user is empty %}
+    <br>{% if app.user is empty %}
         <a href="{{ path('connexion') }}">
             <br><button class="btn waves-effect waves-light center" type="submit" name="action">Se connecter et commenter</button>
         </a>

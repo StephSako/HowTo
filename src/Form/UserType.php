@@ -17,8 +17,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('lastname', TextType::class,[
-                'attr' => ['class' => 'htl', 'data-length' => 30]]
-            )
+                'attr' => ['class' => 'htl', 'data-length' => 30]])
             ->add('firstname', TextType::class,[
                 'attr' => ['class' => 'htl', 'data-length' => 30]])
             ->add('mail', EmailType::class)
@@ -26,6 +25,7 @@ class UserType extends AbstractType
                 'required' => false
             ])
             ->add('password', PasswordType::class,[
+                'required' => false,
                 'attr' => ['class' => 'htl', 'data-length' => 30]]);
     }
 

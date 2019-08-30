@@ -15,12 +15,12 @@
 {% endmacro %}
 
 {% macro form(titre, icon, form, user) %}
-    {% import 'paterns/macros/form.html.twig' as form %}
+    {% import 'paterns/macros/forms/user.html.twig' as user_form %}
 
     <li>
         <div class="collapsible-header"><i class="material-icons">{{ icon }}</i>{{ titre }}</div>
         <div class="collapsible-body">
-            {{ form.user(form, user, 'Modifier') }}
+            {{ user_form.edit(form, user, 'Modifier') }}
         </div>
     </li>
 {% endmacro %}
