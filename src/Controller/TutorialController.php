@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Controller\PanelData\Categories;
+use App\Controller\PanelData\LatestPosts;
 use App\Entity\AnswerTutorial;
 use App\Entity\LikeTutorial;
 use App\Entity\Tutorial;
 use App\Form\AnswerTutorialType;
 use App\Form\TutorialType;
 use App\Repository\AnswerTutorialRepository;
-use App\Repository\CategoryRepository;
-use App\Repository\ForumRepository;
 use App\Repository\LikeTutorialRepository;
 use App\Repository\TutorialRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -31,14 +31,6 @@ class TutorialController extends AbstractController
      * @var TutorialRepository
      */
     private $tr;
-    /**
-     * @var CategoryRepository
-     */
-    private $cr;
-    /**
-     * @var ForumRepository
-     */
-    private $fr;
     private $categories;
     private $latest_posts_forums;
     private $latest_posts_tutorials;
@@ -51,19 +43,17 @@ class TutorialController extends AbstractController
      */
     private $em;
 
-    public function __construct(ObjectManager $em, LikeTutorialRepository $ltr, CategoryRepository $cr, TutorialRepository $tr, ForumRepository $fr, AnswerTutorialRepository $atr)
+    public function __construct(ObjectManager $em, LikeTutorialRepository $ltr, LatestPosts $latestPosts, Categories $categories, TutorialRepository $tr, AnswerTutorialRepository $atr)
     {
-        $this->cr = $cr;
         $this->tr = $tr;
-        $this->fr = $fr;
         $this->atr = $atr;
         $this->ltr = $ltr;
         $this->em = $em;
 
         // Panneaux latéraux
-        $this->categories = $this->cr->findBy(array(), array('label' => 'ASC'));
-        $this->latest_posts_tutorials = $this->tr->findTutorials_OB_L(8, 'datecreation');
-        $this->latest_posts_forums = $this->fr->findForums_OB_L(8, 'datecreation');
+        $this->categories = $categories->getCategories();
+        $this->latest_posts_tutorials = $latestPosts->getLatestPostsTutorials();
+        $this->latest_posts_forums = $latestPosts->getLatestPostsForums();
     }
 
     /**

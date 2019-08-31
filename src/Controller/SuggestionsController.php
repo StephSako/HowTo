@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Controller\PanelData\Categories;
+use App\Entity\Category;
 use App\Entity\Forum;
 use App\Entity\SuggestionForum;
 use App\Entity\SuggestionTutorial;
 use App\Entity\Tutorial;
 use App\Form\SuggestionForumType;
 use App\Form\SuggestionTutorialType;
-use App\Repository\CategoryRepository;
 use App\Repository\SuggestionForumRepository;
 use App\Repository\SuggestionTutorialRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -30,23 +31,23 @@ class SuggestionsController extends AbstractController
      */
     private $suggestionForumRepository;
     /**
-     * @var CategoryRepository
+     * @var Category[]|array
      */
-    private $cr;
+    private $categories;
 
     /**
      * SuggestionsController constructor.
      * @param ObjectManager $em
-     * @param CategoryRepository $cr
+     * @param Categories $categories
      * @param SuggestionTutorialRepository $suggestionTutorialRepository
      * @param SuggestionForumRepository $suggestionForumRepository
      */
-    public function __construct(ObjectManager $em, CategoryRepository $cr, SuggestionTutorialRepository $suggestionTutorialRepository, SuggestionForumRepository $suggestionForumRepository)
+    public function __construct(ObjectManager $em, Categories $categories, SuggestionTutorialRepository $suggestionTutorialRepository, SuggestionForumRepository $suggestionForumRepository)
     {
         $this->em = $em;
         $this->suggestionTutorialRepository = $suggestionTutorialRepository;
         $this->suggestionForumRepository = $suggestionForumRepository;
-        $this->cr = $cr;
+        $this->categories = $categories->getCategories();
     }
 
     /**
@@ -72,7 +73,7 @@ class SuggestionsController extends AbstractController
         return $this->render('pages/suggestion.html.twig', [
             'type' => 'forum',
             'post' => $forum,
-            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
+            'categories' => $this->categories,
             'form' => $form->createView()
         ]);
     }
@@ -100,7 +101,7 @@ class SuggestionsController extends AbstractController
         return $this->render('pages/suggestion.html.twig', [
             'type' => 'tutorial',
             'post' => $tutorial,
-            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
+            'categories' => $this->categories,
             'form' => $form->createView()
         ]);
     }

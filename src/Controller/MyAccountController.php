@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Controller\PanelData\Categories;
+use App\Entity\Category;
 use App\Form\UserEditType;
 use App\Repository\AnswerForumRepository;
 use App\Repository\AnswerTutorialRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\ForumReportingRepository;
 use App\Repository\ForumRepository;
 use App\Repository\InformationsRepository;
@@ -61,11 +62,11 @@ class MyAccountController extends AbstractController {
      */
     private $informationsRepository;
     /**
-     * @var CategoryRepository
+     * @var Category[]|array
      */
-    private $cr;
+    private $categories;
 
-    public function __construct(InformationsRepository $informationsRepository, CategoryRepository $cr, TutorialReportingRepository $tutorialReportingRepository, ForumReportingRepository $forumReportingRepository, SuggestionTutorialRepository $suggestionTutorialRepository, SuggestionForumRepository $suggestionForumRepository, AnswerTutorialRepository $answerTutorialRepository, AnswerForumRepository $answerForumRepository, TutorialRepository $tutorialRepository, ForumRepository $forumRepository, ObjectManager $em)
+    public function __construct(InformationsRepository $informationsRepository, Categories $categories, TutorialReportingRepository $tutorialReportingRepository, ForumReportingRepository $forumReportingRepository, SuggestionTutorialRepository $suggestionTutorialRepository, SuggestionForumRepository $suggestionForumRepository, AnswerTutorialRepository $answerTutorialRepository, AnswerForumRepository $answerForumRepository, TutorialRepository $tutorialRepository, ForumRepository $forumRepository, ObjectManager $em)
     {
         $this->tutorialRepository = $tutorialRepository;
         $this->forumRepository = $forumRepository;
@@ -77,7 +78,7 @@ class MyAccountController extends AbstractController {
         $this->tutorialReportingRepository = $tutorialReportingRepository;
         $this->forumReportingRepository = $forumReportingRepository;
         $this->informationsRepository = $informationsRepository;
-        $this->cr = $cr;
+        $this->categories = $categories->getCategories();
     }
 
     /**
@@ -113,7 +114,7 @@ class MyAccountController extends AbstractController {
             'own_answers_forums' => $own_answers_forums,
             'own_answers_tutorials' => $own_answers_tutorials,
             'own_suggestions_tutos' => $own_suggestions_tutos,
-            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
+            'categories' => $this->categories,
             'own_suggestions_forums' => $own_suggestions_forums,
             'user' => $user,
             'form' => $form->createView()

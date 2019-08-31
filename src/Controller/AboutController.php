@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Controller\PanelData\Categories;
+use App\Controller\PanelData\LatestPosts;
 use App\Entity\Informations;
 use App\Form\InformationType;
 use App\Repository\CategoryRepository;
@@ -22,11 +24,16 @@ class AboutController extends AbstractController {
      * @var CategoryRepository
      */
     private $cr;
+    /**
+     * @var LatestPosts
+     */
+    private $categories;
 
-    public function __construct(ObjectManager $em, CategoryRepository $cr)
+    public function __construct(ObjectManager $em, CategoryRepository $cr, Categories $categories)
     {
         $this->em = $em;
         $this->cr = $cr;
+        $this->categories = $categories->getCategories();
     }
 
     /**
@@ -50,7 +57,7 @@ class AboutController extends AbstractController {
 
         return $this->render('pages/about.html.twig',[
             'form' => $form->createView(),
-            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
+            'categories' => $this->categories,
             'info' => $info
         ]);
     }

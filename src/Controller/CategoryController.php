@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
-use App\Repository\ForumRepository;
+use App\Controller\PanelData\Categories;
+use App\Controller\PanelData\LatestPosts;
+use App\Entity\Category;
+use App\Entity\Forum;
+use App\Entity\Tutorial;
 use App\Repository\TutorialRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,27 +19,24 @@ class CategoryController extends AbstractController
      */
     private $tr;
     /**
-     * @var CategoryRepository
+     * @var Category[]|array
      */
-    private $cr;
+    private $categories;
     /**
-     * @var ForumRepository
+     * @var Forum[]|array
      */
-    private $fr;
-    public $categories;
     private $latest_posts_forums;
+    /**
+     * @var Tutorial[]|array
+     */
     private $latest_posts_tutorials;
 
-    public function __construct(CategoryRepository $cr, TutorialRepository $tr, ForumRepository $fr)
+    public function __construct(Categories $categories, LatestPosts $latestPosts)
     {
-        $this->cr = $cr;
-        $this->tr = $tr;
-        $this->fr = $fr;
-
         // Panneaux latéraux
-        $this->categories = $this->cr->findBy(array(), array('label' => 'ASC'));
-        $this->latest_posts_tutorials = $this->tr->findTutorials_OB_L(8, 'datecreation');
-        $this->latest_posts_forums = $this->fr->findForums_OB_L(8, 'datecreation');
+        $this->categories = $categories->getCategories();
+        $this->latest_posts_tutorials = $latestPosts->getLatestPostsTutorials();
+        $this->latest_posts_forums = $latestPosts->getLatestPostsForums();
     }
 
     /**

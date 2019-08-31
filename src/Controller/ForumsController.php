@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Controller\PanelData\Categories;
+use App\Controller\PanelData\LatestPosts;
 use App\Entity\AnswerForum;
 use App\Entity\Category;
 use App\Entity\Forum;
@@ -10,10 +12,8 @@ use App\Entity\Tutorial;
 use App\Form\AnswerForumType;
 use App\Form\ForumType;
 use App\Repository\AnswerForumRepository;
-use App\Repository\CategoryRepository;
 use App\Repository\ForumRepository;
 use App\Repository\LikeForumRepository;
-use App\Repository\TutorialRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -25,10 +25,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForumsController extends AbstractController
 {
 
-    /**
-     * @var CategoryRepository
-     */
-    private $cr;
     /**
      * @var ForumRepository
      */
@@ -50,10 +46,6 @@ class ForumsController extends AbstractController
      */
     private $afr;
     /**
-     * @var TutorialRepository
-     */
-    private $tr;
-    /**
      * @var LikeForumRepository
      */
     private $lfr;
@@ -62,19 +54,17 @@ class ForumsController extends AbstractController
      */
     private $em;
 
-    public function __construct(ObjectManager $em, LikeForumRepository $lfr, CategoryRepository $cr, TutorialRepository $tr, ForumRepository $fr, AnswerForumRepository $afr)
+    public function __construct(ObjectManager $em, LikeForumRepository $lfr, LatestPosts $latestPosts, Categories $categories, ForumRepository $fr, AnswerForumRepository $afr)
     {
-        $this->cr = $cr;
-        $this->tr = $tr;
         $this->fr = $fr;
         $this->afr = $afr;
         $this->lfr = $lfr;
         $this->em = $em;
 
         // Panneaux latéraux
-        $this->categories = $this->cr->findBy(array(), array('label' => 'ASC'));
-        $this->latest_posts_tutorials = $this->tr->findTutorials_OB_L(8, 'datecreation');
-        $this->latest_posts_forums = $this->fr->findForums_OB_L(8, 'datecreation');
+        $this->categories = $categories->getCategories();
+        $this->latest_posts_tutorials = $latestPosts->getLatestPostsTutorials();
+        $this->latest_posts_forums = $latestPosts->getLatestPostsForums();
     }
 
     /**

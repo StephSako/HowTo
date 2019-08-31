@@ -1,9 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\PanelData\Categories;
+use App\Entity\Category;
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\CategoryRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,15 +24,16 @@ class SecurityController extends AbstractController {
      * @var UserRepository
      */
     private $sr;
-    /**
-     * @var CategoryRepository
-     */
-    private $cr;
 
-    public function __construct(UserRepository $sr, ObjectManager $em, CategoryRepository $cr){
+    /**
+     * @var Category[]|array
+     */
+    private $categories;
+
+    public function __construct(UserRepository $sr, ObjectManager $em, Categories $categories){
         $this->sr = $sr;
         $this->em = $em;
-        $this->cr = $cr;
+        $this->categories = $categories->getCategories();
     }
 
     /**
@@ -47,11 +49,11 @@ class SecurityController extends AbstractController {
             return $this->render('pages/login.twig', [
                 'lastusername' => $lastusername,
                 'error' => $error,
-                'categories' => $this->cr->findBy(array(), array('label' => 'ASC'))
+                'categories' => $this->categories
             ]);
         }
         else return $this->render('redirect/connected.html.twig', [
-            'categories' => $this->cr->findBy(array(), array('label' => 'ASC'))
+            'categories' => $this->categories
         ]);
     }
 
@@ -81,7 +83,7 @@ class SecurityController extends AbstractController {
             return $this->render('pages/new.html.twig', [
                 'user' => $user,
                 'form' => $form->createView(),
-                'categories' => $this->cr->findBy(array(), array('label' => 'ASC'))
+                'categories' => $this->categories
             ]);
         }
         else return $this->render('redirect/connected.html.twig');

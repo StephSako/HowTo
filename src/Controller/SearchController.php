@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\Controller\PanelData\Categories;
+use App\Controller\PanelData\LatestPosts;
+use App\Entity\Category;
 use App\Repository\ForumRepository;
 use App\Repository\TutorialRepository;
 use App\Repository\UserRepository;
@@ -30,24 +32,23 @@ class SearchController extends AbstractController {
      * @var UserRepository
      */
     private $userRepository;
-
     private $latest_posts_forums;
     private $latest_posts_tutorials;
     /**
-     * @var CategoryRepository
+     * @var Category[]|array
      */
-    private $categoryRepository;
+    private $categories;
 
-    public function __construct(ObjectManager $em, CategoryRepository $categoryRepository, TutorialRepository $tutorialRepository, ForumRepository $forumRepository, UserRepository $userRepository)
+    public function __construct(ObjectManager $em, LatestPosts $latestPosts, Categories $categories, TutorialRepository $tutorialRepository, ForumRepository $forumRepository, UserRepository $userRepository)
     {
         $this->em = $em;
         $this->tutorialRepository = $tutorialRepository;
         $this->forumRepository = $forumRepository;
         $this->userRepository = $userRepository;
 
-        $this->latest_posts_tutorials = $this->tutorialRepository->findTutorials_OB_L(8, 'datecreation');
-        $this->latest_posts_forums = $this->forumRepository->findForums_OB_L(8, 'datecreation');
-        $this->categoryRepository = $categoryRepository;
+        $this->categories = $categories->getCategories();
+        $this->latest_posts_tutorials = $latestPosts->getLatestPostsTutorials();
+        $this->latest_posts_forums = $latestPosts->getLatestPostsForums();
     }
 
     /**
@@ -63,7 +64,7 @@ class SearchController extends AbstractController {
         $searched_users = $this->userRepository->findSearchedUsers($keyword);
 
         return $this->render('pages/search.html.twig',[
-            'categories' => $this->categoryRepository->findBy(array(), array('label' => 'ASC')),
+            'categories' => $this->categories,
             'latest_posts_tutorials' => $this->latest_posts_tutorials,
             'latest_posts_forums' => $this->latest_posts_forums,
             'searched_tutos' => $searched_tutos,
