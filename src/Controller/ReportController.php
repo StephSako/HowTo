@@ -8,6 +8,7 @@ use App\Entity\Tutorial;
 use App\Entity\TutorialReporting;
 use App\Form\ForumReportType;
 use App\Form\TutorialReportType;
+use App\Repository\CategoryRepository;
 use App\Repository\ForumRepository;
 use App\Repository\ReportingLabelRepository;
 use App\Repository\TutorialRepository;
@@ -36,20 +37,26 @@ class ReportController extends AbstractController
      * @var ObjectManager
      */
     private $em;
+    /**
+     * @var CategoryRepository
+     */
+    private $cr;
 
     /**
      * ReportController constructor.
      * @param ObjectManager $em
+     * @param CategoryRepository $cr
      * @param ReportingLabelRepository $mfr
      * @param TutorialRepository $tr
      * @param ForumRepository $fr
      */
-    public function __construct(ObjectManager $em, ReportingLabelRepository $mfr, TutorialRepository $tr, ForumRepository $fr)
+    public function __construct(ObjectManager $em, CategoryRepository $cr, ReportingLabelRepository $mfr, TutorialRepository $tr, ForumRepository $fr)
     {
         $this->mfr = $mfr;
         $this->tr = $tr;
         $this->fr = $fr;
         $this->em = $em;
+        $this->cr = $cr;
     }
 
     /**
@@ -73,6 +80,7 @@ class ReportController extends AbstractController
 
         return $this->render('pages/signalement_form.html.twig', [
             'tutorial' => $tutorial,
+            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
             'form' => $form->createView()
         ]);
     }
@@ -97,6 +105,7 @@ class ReportController extends AbstractController
 
         return $this->render('pages/signalement_form.html.twig', [
             'forum' => $forum,
+            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
             'form' => $form->createView()
         ]);
     }

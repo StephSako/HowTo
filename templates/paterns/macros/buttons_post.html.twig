@@ -3,7 +3,7 @@
         <div class="right">
             <form method="POST" action="{{ path(type ~ '.unlike', {id: details_post.id}) }}">
                 <button class="btn tooltipped waves-effect waves-light red darken-2 button_post" type="submit" name="action"
-                        data-position="top" data-tooltip="{{ nb_likes }}">
+                        data-position="top" data-tooltip="{{ nb_likes }}" {% if app.user is empty %}disabled{% endif %}>
                     <i class="material-icons">thumb_down</i>
                 </button>
             </form>
@@ -13,7 +13,7 @@
             <form method="POST" action="{{ path(type ~ '.like', {id: details_post.id}) }}">
                 <button class="btn tooltipped waves-effect waves-light green accent-4 button_post" type="submit"
                         name="action"
-                        data-position="top" data-tooltip="{{ nb_likes }}">
+                        data-position="top" data-tooltip="{{ nb_likes }}" {% if app.user is empty %}disabled{% endif %}>
                     <i class="material-icons">thumb_up</i>
                 </button>
             </form>
@@ -22,7 +22,7 @@
 
     <div class="right">
         <a href="{{ path('newSuggestion' ~ type, {id: details_post.id}) }}">
-            <button class="btn waves-effect waves-light right yellow darken-3 button_post">
+            <button class="btn waves-effect waves-light right yellow darken-3 button_post" {% if app.user is empty %}disabled{% endif %}>
                 <i class="material-icons">lightbulb_outline</i>
             </button>
         </a>
@@ -30,7 +30,7 @@
 
     <div class="right">
         <a href="{{ path('report' ~ type, {id: details_post.id}) }}">
-            <button class="btn waves-effect waves-light red lighten-2 button_post">
+            <button class="btn waves-effect waves-light red lighten-2 button_post" {% if app.user is empty %}disabled{% endif %}>
                 <i class="material-icons">report</i>
             </button>
         </a>

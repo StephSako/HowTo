@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\UserType;
+use App\Form\UserEditType;
 use App\Repository\AnswerForumRepository;
 use App\Repository\AnswerTutorialRepository;
 use App\Repository\CategoryRepository;
@@ -95,7 +95,7 @@ class MyAccountController extends AbstractController {
         $own_suggestions_tutos = $this->suggestionTutorialRepository->FindOwnSuggestionsTutorial($this->getUser());
         $own_suggestions_forums = $this->suggestionForumRepository->FindOwnSuggestionsForum($this->getUser());
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

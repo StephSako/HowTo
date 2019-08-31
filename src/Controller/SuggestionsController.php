@@ -8,6 +8,7 @@ use App\Entity\SuggestionTutorial;
 use App\Entity\Tutorial;
 use App\Form\SuggestionForumType;
 use App\Form\SuggestionTutorialType;
+use App\Repository\CategoryRepository;
 use App\Repository\SuggestionForumRepository;
 use App\Repository\SuggestionTutorialRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -28,12 +29,24 @@ class SuggestionsController extends AbstractController
      * @var SuggestionForumRepository
      */
     private $suggestionForumRepository;
+    /**
+     * @var CategoryRepository
+     */
+    private $cr;
 
-    public function __construct(ObjectManager $em, SuggestionTutorialRepository $suggestionTutorialRepository, SuggestionForumRepository $suggestionForumRepository)
+    /**
+     * SuggestionsController constructor.
+     * @param ObjectManager $em
+     * @param CategoryRepository $cr
+     * @param SuggestionTutorialRepository $suggestionTutorialRepository
+     * @param SuggestionForumRepository $suggestionForumRepository
+     */
+    public function __construct(ObjectManager $em, CategoryRepository $cr, SuggestionTutorialRepository $suggestionTutorialRepository, SuggestionForumRepository $suggestionForumRepository)
     {
         $this->em = $em;
         $this->suggestionTutorialRepository = $suggestionTutorialRepository;
         $this->suggestionForumRepository = $suggestionForumRepository;
+        $this->cr = $cr;
     }
 
     /**
@@ -59,6 +72,7 @@ class SuggestionsController extends AbstractController
         return $this->render('pages/suggestion.html.twig', [
             'type' => 'forum',
             'post' => $forum,
+            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
             'form' => $form->createView()
         ]);
     }
@@ -86,6 +100,7 @@ class SuggestionsController extends AbstractController
         return $this->render('pages/suggestion.html.twig', [
             'type' => 'tutorial',
             'post' => $tutorial,
+            'categories' => $this->cr->findBy(array(), array('label' => 'ASC')),
             'form' => $form->createView()
         ]);
     }

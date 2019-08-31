@@ -94,18 +94,18 @@ class User implements UserInterface, Serializable
      *
      * @ORM\Column(name="password", type="string", length=100, nullable=false)
      *
+     *  @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} letttres",
+     *      maxMessage = "Votre mot de passe doit contenir au maximum {{ limit }} letttres",
+     *     )
+     *
      */
     private $password;
 
     /**
      * @var bool
-     *
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 30,
-     *      minMessage = "Votre mot de passe doit contenir au moins {{ limit }} letttres",
-     *      maxMessage = "Votre mot de passe doit contenir au maximum {{ limit }} letttres",
-     *     )
      *
      * @ORM\Column(name="is_Admin", type="boolean", nullable=false)
      */
