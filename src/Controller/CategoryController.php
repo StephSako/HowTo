@@ -30,13 +30,18 @@ class CategoryController extends AbstractController
      * @var Tutorial[]|array
      */
     private $latest_posts_tutorials;
+    /**
+     * @var LatestPosts
+     */
+    private $latestPosts;
 
-    public function __construct(Categories $categories, LatestPosts $latestPosts)
+    public function __construct(Categories $categories, LatestPosts $latestPosts, TutorialRepository $tr)
     {
         // Panneaux latéraux
         $this->categories = $categories->getCategories();
         $this->latest_posts_tutorials = $latestPosts->getLatestPostsTutorials();
         $this->latest_posts_forums = $latestPosts->getLatestPostsForums();
+        $this->tr = $tr;
     }
 
     /**

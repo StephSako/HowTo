@@ -6858,7 +6858,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       }
 
       /**
-       * Update Data
+       * Update LatestPosts
        * @param {Object} data
        */
 
@@ -7688,7 +7688,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
 
       /**
-       * Get Chips Data
+       * Get Chips LatestPosts
        */
       value: function getData() {
         return this.chipsData;

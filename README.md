@@ -1,101 +1,66 @@
-# Memo _Symfony
 
-### Problèmes
+## Projet personnel réalisé avec le Framework PHP Symfony4 et librairie CSS Materialize
 
-* Problème timezone:<br>
-Database > Properties > Advanced > serverTimeZone => CET
+## A quoi ce site sert-il ?
 
-* Problème phpMyAdmin avec PHP 7.2:<br>
-Changer ligne 613 : sudo nano -c /usr/share/phpmyadmin/libraries/sql.lib.php<br>
-en ((count($analyzed_sql_results['select_expr']) == 1)
+commentfaire.ddns.net permet à tous les internautes de pouvoir partager leurs connaissances dans des catégories diverses et variées comme l'informatique, le sport ou encore le life style. Ainsi, un système de commentaires a été mis en place permettant aux autres utilisateurs de pouvoir donner leur avis sur le contenu, liker, signaler le contenu s'il ne respecte pas les règles ou envoyer une suggestion directement au créateur du tutoriel.
 
-* Comptatibilité avec Apache:<br>
-composer require symfony/apache-pack
+Ils ont également la possibilité de créer des forums afin de lancer des discussions ou des débats avec la communauté.
 
-### Installations/créations
+#### Listing
 
-* Installer composer:<br>
-php -r "eval('?>'.file_get_contents('http://getcomposer.org/installer'));"<br>
-sudo apt install composer<br>
-* Vérifier l'installation:<br>
-php composer.phar --version)<br>
-* Mettre à jour composer:<br>
-php composer.phar self-update
+Voici les pages principales du site, listant les tutoriels et forums avec un système de pagination.
+Deux panneaux latéraux listent toutes les catégories disponibles ainsi que les 8 tutoriels et forums les plus récents.
 
-* Créer un projet Symfony:<br>
-composer create-project symfony/website-skeleton mon_projet
+<p align="center"><image listing tutoriels></p>
+<p align="center"><image listing forums></p>
 
-* Désigner un projet du type "Symfony" dans Intellij:<br>
-File -> Settings -> Languages & Framework -> PHP -> Symfony
+#### Navbar
 
-* Fichier de configuration de la BDD:<br>
-.env
+Différentes fonctionnalités sont disponibles dans la navbar :
+	* Accéder à la page des tutoriels et des forums
+	* Accéder à son compte
+	* Rechercher un titre de tutoriel, forum ou nom d'un utilisateur à partir d'un mot clef
 
-### Commandes générales
+<p align="center"><img src="https://image.noelshack.com/fichiers/2019/36/1/1567432030-navbar.png"></p>
 
-* Lister les commandes disponibles<br>
-php bin/console
+	* Si connecté en tant qu'administrateur, accès au CRUD
+	* Se déconnecté
+	
 
-* Lister les classes en autowiring:<br>
-php bin/console debug:autowiring
+#### Création
 
-* Vider le cache:<br>
-- prod : php bin/console cache:clear --env=prod --no-debug<br>
-- dev  : php bin/console cache:clear
+Il est possible de créer un tutoriel ou un forum à l'aide d'un bouton flottant.
+<p align="center"><image bouton flottant></p>
 
-* Lancer le serveur interne de php:<br>
-php bin/console server:run<br>
-php -S 127.0.0.1:8000 -t public (web debug toolbar enabled)
+Il permet alors d'accéder aux formulaires de création des posts :
+Pour les tutoriels, il est possible d'imager ces propos par une photo (fonctionnalité permettant d'uploader plusieurs images en cours de développement ...).
 
-* Générer un controller
-php bin/console make:controller
+<p align="center"><image formualire creation tutoriel></p>
+<p align="center"><image formualire creation forums></p>
 
-### Git
+### Profils
 
-* Initialiser dépôt Git:<br>
-echo "# HowToDo_Symfony" >> README.md<br>
-git init<br>
-git add *<br>
-git commit -m "First commit"<br>
-git remote add origin https://github.com/StephSako/__________.git<br>
-git push -u origin master
+#### Utilisateurs
 
-### Base de données
+Afin de pouvoir poster, répondre et intéragir pleinement avec le site, les utilisateurs devront créer un compte qu'ils pourront alors gérer : modification des informations personnelles (modification du mot de passe en travaux ...), visionnage de ses tutoriels, forums et commentaires postés, et suggestions reçues d'autres utilisateurs.
 
-* Créer une BDD: (modifier infos BDD dans .env au préalable)<br>
-php bin/console doctrine:database:create
+<p align="center"><image compte></p>
+<p align="center"><image compte infos persos></p>
+<p align="center"><image forums></p>
 
-* Générer une Entity de la BDD:<br>
-php bin/console make:entity
+Par conséquent, si le visiteur n'est pas anthentifié, des fonctionnalités lui seront alors bloquées.
+<p align="center"><image not connected></p>
 
-* Générer/mettre à jour les entités d'une BDD existante:<br>
-php bin/console doctrine:mapping:import "App\Entity" annotation --path=src/Entity
 
-* Générer Setters/Getters des Entities:<br>
-php bin/console make:entity --regenerate
+#### Administrateurs
 
-* Générer Entity's Repository:<br>
-1) Ajouter **@ORM\Entity(repositoryClass="App\Repository\MyClassRepository")** dans l'annotation de l'entité<br>
-2) **php bin/console make:entity --regenerate**
+Quant aux administrateurs, ils ont l'accès à un CRUD / back-office leur permettant de gérer les posts, utilisateurs, signalement enregistrés et contacts de visiteurs leur ayant posé question.
 
-* Installer le composant fixtures:
-composer require orm-fixtures --dev
+<p align="center"><image back office></p>
 
-* Créer une fixture:
-php bin/console make:fixtures
+#### Responsive
 
-* Lancer une fixture:
-php bin/console doctrine:fixtures:load --append
+Le site est responsive grâce au système de grille de la librairie CSS Materialize.
 
-### Formulaires
-
-* Générer un formulaire (Type):
-php bin/console make:form
-
-### Déploiement
-> rsync -av ./ user@server:~/www/{...}/ --include=public/build --include=vendor--exclude-from=.gitignore --exclude=".*"
-
-### SASS
-* Déployer SASS
-./dart-sass/sass style.scss style.css
-
+<p align="center"><image responsive></p>
