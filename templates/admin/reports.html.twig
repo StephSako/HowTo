@@ -35,9 +35,9 @@
                 <tr>
                     <td>#{{ report.id }}</td>
                     <td>{{ report.idReportingLabel.label }}</td>
-                    <td>{{ report.idTutorial.idUser.firstname ~ ' ' ~ report.idTutorial.idUser.lastname }}</td>
+                    <td><a href="{{ path('posts.createdBy', {id: report.idTutorial.idUser.id }) }}">{{ report.idTutorial.idUser.firstname ~ ' ' ~ report.idTutorial.idUser.lastname }}</a></td>
                     <td><a href="{{ path('tutorial.details', {id: report.idTutorial.id, slug: report.idTutorial.slug }) }}">{{ report.idTutorial.title }}</a></td>
-                    <td>{{ report.idUser.firstname ~ ' ' ~ report.idUser.lastname  }}</td>
+                    <td><a href="{{ path('posts.createdBy', {id: report.idUser.id }) }}">{{ report.idUser.firstname ~ ' ' ~ report.idUser.lastname }}</a></td>
                     <td>{{ report.idTutorial.datecreation|date('d/m/Y') }}</td>
                     <td><form method="post" action="{{ path('tutorial.report.deleteTR', {id: report.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ?')">
                             <input type="hidden" name="_method" value="DELETE">

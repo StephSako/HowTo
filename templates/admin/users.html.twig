@@ -46,7 +46,7 @@
                             </figure>
                         </td>
                         <td>{% if user.isAdmin %}<span style="color: red;">{{ 'Administrateur' }}</span>{% else %}<span style="color: blue;">{{ 'Utilisateur' }}{% endif %}</td>
-                        <td>{{ user.lastname ~ ' ' ~ user.firstname }}</td>
+                        <td><a href="{{ path('posts.createdBy', {id: user.id }) }}">{{ user.lastname ~ ' ' ~ user.firstname }}</a></td>
                         <td>{{ user.mail }}</td>
                         <td>
                             <div class="row">

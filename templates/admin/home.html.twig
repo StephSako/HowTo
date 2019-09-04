@@ -41,7 +41,7 @@
                         <td>#{{ tuto.id }}</td>
                         <td><a href="{{ path('tutorial.details', {id: tuto.id, slug: tuto.slug }) }}">{{ tuto.title }}</a></td>
                         <td><a href="{{ path('category.list', {id: tuto.idCategory.id, label: tuto.idCategory.label }) }}">{{ tuto.idCategory.label }}</a></td>
-                        <td>{{ tuto.idUser.firstname }} {{ tuto.idUser.lastname }}</td>
+                        <td><a href="{{ path('posts.createdBy', {id: tuto.idUser.id }) }}">{{ tuto.idUser.firstname ~ ' ' ~ tuto.idUser.lastname }}</a></td>
                         <td>{{ tuto.datecreation|date("d/m/Y") }}</td>
                         <td>
                             <div class="row">
@@ -89,8 +89,8 @@
             {% for forum in forums %}
                 <tr>
                     <td>#{{ forum.id }}</td>
-                    <td>{{ forum.title }}</td>
-                    <td>{{ forum.idUser.firstname }} {{ forum.idUser.lastname }}</td>
+                    <td><a href="{{ path('forum.details', {id: forum.id, slug: forum.slug }) }}">{{ forum.title }}</a></td>
+                    <td><a href="{{ path('posts.createdBy', {id: forum.idUser.id }) }}">{{ forum.idUser.firstname ~ ' ' ~ forum.idUser.lastname }}</a></td>
                     <td>{{ forum.datecreation|date("d/m/Y") }}</td>
                     <td>
                         <div class="row">

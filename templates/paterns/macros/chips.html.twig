@@ -4,3 +4,10 @@
         <span><a class="indigo-text text-darken-4" href="{{ path('posts.createdBy', {id: user.id }) }}">{{ user.firstname|capitalize}} {{ user.lastname|upper }}</a></span>
     </div>
 {% endmacro %}
+
+{% macro show_bar(user) %}
+    <div class="chip blue lighten-1 white-text">
+        <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="">
+        <span>{{ user.firstname|capitalize}} {{ user.lastname|upper }}</span>
+    </div>
+{% endmacro %}

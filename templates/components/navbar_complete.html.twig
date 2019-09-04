@@ -43,7 +43,7 @@
         <li><a href="{{ path('connexion') }}">Se connecter</a></li>
         <li><a href="{{ path('inscription') }}">S'inscrire</a></li>
     {% else %}
-        <li class="center">{{ chips.show(app.user) }}</li>
+        <li class="center">{{ chips.show_bar(app.user) }}</li>
         <li><a href="{{ path('myaccount.home') }}">Mon compte</a></li>
         {% if 'ROLE_ADMIN' in app.token.roleNames %}
             <li><a href="{{ path('admin.home.index') }}">Administration</a></li>
@@ -114,7 +114,7 @@
             <li>
                 <a class="dropdown-trigger" href="#" data-target="dropdown1">
                     {% if not app.user is null %}
-                        {{ chips.show(app.user) }}
+                        {{ chips.show_bar(app.user) }}
                     {% else %}
                         {{ 'Compte' }}
                     {% endif %}
