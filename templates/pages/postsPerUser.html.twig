@@ -1,0 +1,41 @@
+{% extends 'paterns/base_triptych.html.twig' %}
+{% import 'paterns/macros/post.html.twig' as _post %}
+
+{% block title %}
+    {{ 'Posts créés par ' ~ user }}
+{% endblock %}
+
+{% block body %}
+
+    <legend>Tutoriels créés par {{ user }}</legend>
+    <div class="row cards-homes">
+        {% if tutorials is empty %}
+            <blockquote>{{ user }} n'a pas posté de tutoriels</blockquote>
+        {% else %}
+            <div class="row">
+                {% for tutorial in tutorials %}
+                    <div class="s12 col l6">
+                        {{ _post.card('tutorial', tutorial) }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <legend>Forums créés par {{ user }}</legend>
+    <div class="row cards-homes">
+        {% if forums is empty %}
+            <blockquote>{{ user }} n'a pas posté de forums</blockquote>
+        {% else %}
+            <div class="row">
+                {% for forum in forums %}
+                    <div class="s12 col l6">
+                        {{ _post.card('forum', forum) }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    {% include('components/floating_button.html.twig') %}
+{% endblock %}
